@@ -20,19 +20,4 @@ export class UserController {
       },
     });
   }
-
-  @Post('admin/register')
-  async register(@Body() body: AdminRegisterDto) {
-    const { password_confirm, ...data } = body;
-    if (body.password !== body.password_confirm) {
-      throw new BadRequestException('Password do not match');
-    }
-
-    const hashed = await bcrypt.hash(body.password, 12);
-    return this.userService.save({
-      ...data,
-      password: hashed,
-      is_admin: true,
-    });
-  }
 }

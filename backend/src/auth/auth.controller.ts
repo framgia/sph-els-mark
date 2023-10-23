@@ -27,8 +27,8 @@ export class AuthController {
     private jwtService: JwtService,
   ) {}
 
-  @Post('student/register')
-  async register(@Body() body: RegisterDto) {
+  @Post(['student/register', 'admin/register'])
+  async register(@Body() body: RegisterDto, @Req() request: Request) {
     const { password_confirm, ...data } = body;
     if (body.password !== body.password_confirm) {
       throw new BadRequestException('Password do not match');
@@ -38,15 +38,16 @@ export class AuthController {
     return this.userService.save({
       ...data,
       password: hashed,
-      is_admin: false,
+      is_admin: request.path === '/api/admin/register',
     });
   }
 
-  @Post('student/login')
+  @Post(['student/login', 'admin/login'])
   async login(
     @Body('email') email: string,
     @Body('password') password: string,
     @Res({ passthrough: true }) response: Response,
+    @Req() request: Request,
   ) {
     const user = await this.userService.findOne({ where: { email } });
 
@@ -58,8 +59,11 @@ export class AuthController {
       throw new BadRequestException('Invalid Credentials');
     }
 
+    const adminLogin = request.path === '/api/admin/login';
+
     const jwt = await this.jwtService.signAsync({
       id: user.user_id,
+      scope: adminLogin ? 'student' : 'admin',
     });
 
     response.cookie('jwt', jwt, { httpOnly: true });
@@ -69,11 +73,11 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('student/user')
+  @Get(['student/user', 'admin/user'])
   async user(@Req() request: Request) {
     const cookie = request.cookies['jwt'];
 
-    const { user_id } = await this.jwtService.verifyAsync(cookie);
+    const { id: user_id } = await this.jwtService.verifyAsync(cookie);
 
     const user = await this.userService.findOne({ where: { user_id } });
 
@@ -81,7 +85,7 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard)
-  @Post('student/logout')
+  @Post(['student/logout', 'admin/logout'])
   async logout(@Res({ passthrough: true }) response: Response) {
     response.clearCookie('jwt');
     return {
@@ -90,7 +94,7 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard)
-  @Put('student/user/profile')
+  @Put(['student/user/profile', 'admin/user/profile'])
   async editProfile(
     @Req() request: Request,
     @Body('first_name') first_name: string,
@@ -112,7 +116,7 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard)
-  @Put('student/user/password')
+  @Put(['student/user/password', 'admin/user/password'])
   async changePassword(
     @Req() request: Request,
     @Body('password') password: string,
