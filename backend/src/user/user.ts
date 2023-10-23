@@ -1,5 +1,6 @@
 import { Exclude } from 'class-transformer';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Followers } from 'src/followers/follow';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')
 export class User {
@@ -24,4 +25,10 @@ export class User {
 
   @Column({ default: false })
   avatar: string;
+
+  @OneToMany(() => Followers, (user: Followers) => user.followers)
+  followers: Followers[];
+
+  @OneToMany(() => Followers, (user: Followers) => user.followers)
+  following: Followers[];
 }
