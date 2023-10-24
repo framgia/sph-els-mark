@@ -25,6 +25,6 @@ export class Words {
   correct_word: boolean;
 
   @ManyToOne(() => Category, (category) => category.words)
-  @JoinColumn({ name: 'category_id' })
+  @JoinColumn({ name: 'word_id' })
   category: Category;
 }

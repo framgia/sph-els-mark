@@ -4,7 +4,6 @@ import { CategoriesService } from './categories.service';
 import { Category } from './category';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Words } from './words';
-import { WordsService } from './words.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Category, Words])],

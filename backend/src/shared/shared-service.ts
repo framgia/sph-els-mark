@@ -18,8 +18,4 @@ export abstract class SharedService {
   async update(id: number, options) {
     return this.repository.update(id, options);
   }
-
-  async findWordsForCategory(options) {
-    return this.repository.find(options);
-  }
 }
