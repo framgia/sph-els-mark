@@ -3,6 +3,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Category } from './category';
@@ -25,6 +26,6 @@ export class Words {
   correct_word: boolean;
 
   @ManyToOne(() => Category, (category) => category.words)
-  @JoinColumn({ name: 'word_id' })
+  @JoinColumn({ name: 'category_id' })
   category: Category;
 }

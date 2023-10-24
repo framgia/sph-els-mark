@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Category } from './category';
+import { Words } from './words';
 import { SharedService } from 'src/shared/shared-service';
 import { Repository } from 'typeorm';
 @Injectable()
-export class CategoriesService extends SharedService {
+export class WordsService extends SharedService {
   constructor(
-    @InjectRepository(Category)
-    private readonly categoriesRepository: Repository<Category>,
+    @InjectRepository(Words)
+    private readonly wordsRepository: Repository<Words>,
   ) {
-    super(categoriesRepository);
+    super(wordsRepository);
   }
 }
