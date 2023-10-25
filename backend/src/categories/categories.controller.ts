@@ -1,18 +1,24 @@
-import { Controller, Get, Body, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Body, Post, Req, Param } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/category-create.dto';
-import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller()
 export class CategoriesController {
-  constructor(private readonly categoriesService: CategoriesService) {}
+  constructor(private categoriesService: CategoriesService) {}
 
   @Get(['student/categories', 'admin/categories'])
   async all() {
     return this.categoriesService.find({});
   }
 
-  @Post('admin/categories/create')
+  @Get(['student/categories/words', 'admin/categories/words'])
+  async allWords() {
+    return this.categoriesService.find({
+      relations: ['words'],
+    });
+  }
+
+  @Post('admin/category/create')
   async create(@Body() body: CreateCategoryDto) {
     return this.categoriesService.save(body);
   }
