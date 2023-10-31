@@ -23,6 +23,7 @@ export class Words {
 
   @OneToMany(() => Choices, (choices: Choices) => choices.word, {
     cascade: true,
+    onDelete: 'CASCADE',
   })
   choices: Choices[];
 
