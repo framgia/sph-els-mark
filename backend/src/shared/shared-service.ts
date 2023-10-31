@@ -22,4 +22,8 @@ export abstract class SharedService {
   async create(options) {
     return this.repository.create(options);
   }
+
+  async delete(options) {
+    return this.repository.delete(options);
+  }
 }
