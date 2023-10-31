@@ -139,4 +139,63 @@ export class CategoriesController {
 
     return { code: 200, message: 'Category deleted successfully!' };
   }
+
+  @Put('admin/category/:category_id/word/:word_id/edit')
+  async editWord(
+    @Param('category_id') category_id: number,
+    @Param('word_id') word_id: number,
+    @Body() body: AddWordDto,
+  ) {
+    const category = await this.categoriesService.findOne({
+      where: { category_id },
+    });
+
+    if (!category) {
+      throw new NotFoundException('Category not found!');
+    }
+
+    const word = await this.wordsService.findOne({
+      where: { category_id, word_id },
+      relations: ['choices'],
+    });
+
+    if (!word) {
+      throw new NotFoundException('Word not found in the specified category!');
+    }
+
+    word.given_word = body.given_word;
+    word.correct_word = body.correct_word;
+
+    word.choices = body.choices;
+    const updatedWord = await this.wordsService.save(word);
+
+    return updatedWord;
+  }
+
+  @Delete('admin/category/:category_id/word/:word_id/delete')
+  async deleteWordandChoices(
+    @Param('category_id') category_id: number,
+    @Param('word_id') word_id: number,
+  ) {
+    const category = await this.categoriesService.findOne({
+      where: { category_id },
+    });
+
+    if (!category) {
+      throw new NotFoundException('Category not found!');
+    }
+
+    const word = await this.wordsService.findOne({ where: { word_id } });
+
+    if (!word) {
+      throw new NotFoundException('Word not found!');
+    }
+    const words = await this.wordsService.find({ where: { category } });
+    const wordsId = words.map((word) => word.word_id);
+
+    await this.choicesService.delete({ options: In(wordsId) });
+    await this.wordsService.delete({ word_id });
+
+    return { code: 200, message: 'Word deleted successfully!' };
+  }
 }
