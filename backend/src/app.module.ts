@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { FollowersModule } from './followers/followers.module';
 import { CategoriesModule } from './categories/categories.module';
+import { AnswerModule } from './answer/answer.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { CategoriesModule } from './categories/categories.module';
     AuthModule,
     FollowersModule,
     CategoriesModule,
+    AnswerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
