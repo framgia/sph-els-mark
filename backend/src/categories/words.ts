@@ -7,23 +7,26 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Category } from './category';
+import { Choices } from './choices';
 
 @Entity('words')
 export class Words {
   @PrimaryGeneratedColumn()
   word_id: number;
 
-  @Column({ nullable: false })
+  @Column({ default: 1 })
   category_id: number;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   given_word: string;
 
-  @Column({ nullable: false })
-  choices: string;
+  @OneToMany(() => Choices, (choices: Choices) => choices.word, {
+    cascade: true,
+  })
+  choices: Choices[];
 
-  @Column({ default: false })
-  correct_word: boolean;
+  @Column({ nullable: true })
+  correct_word: string;
 
   @ManyToOne(() => Category, (category) => category.words)
   @JoinColumn({ name: 'category_id' })
