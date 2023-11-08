@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
       const is_admin = request.path.toString().indexOf('api/admin') >= 0;
 
       return (
-        (is_admin && scope === 'admin') || (!is_admin && scope === 'student')
+        (is_admin && scope === 'student') || (!is_admin && scope === 'admin')
       );
     } catch (e) {
       return false;

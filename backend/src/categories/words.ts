@@ -34,5 +34,5 @@ export class Words {
   category: Category;
 
   @OneToMany(() => Answers, (answers: Answers) => answers.words)
-  answers: Answers;
+  answers: Answers[];
 }
