@@ -45,23 +45,16 @@ export class CategoriesController {
   }
 
   // Reminder: Add authguard
-  @Get([
-    'student/:categoryId/words/:wordsId',
-    'admin/:categoryId/words/:wordsId',
-  ])
-  async getChoices(
-    @Param('categoryId') categoryId: number,
-    @Param('wordsId') wordsId: number,
-  ) {
+  @Get(['student/words/:wordId', 'admin/words/:wordId'])
+  async getChoices(@Param('wordId') wordId: number) {
     const words = await this.wordsService.findOne({
-      where: { word_id: wordsId, category_id: categoryId },
+      where: { word_id: wordId },
       relations: ['choices'],
     });
 
-    if (words && categoryId) {
+    if (words) {
       const formattedData = {
         word_id: words.word_id,
-        category_id: words.category_id,
         given_word: words.given_word,
         correct_word: words.correct_word,
         choices: words.choices.map((choice) => {
@@ -75,7 +68,7 @@ export class CategoriesController {
       return formattedData;
     }
 
-    throw new NotFoundException('Category or words not found!');
+    throw new NotFoundException('Word not found!');
   }
   // Reminder: Add authguard
   @Post('admin/category/:category_id/add')
@@ -131,10 +124,10 @@ export class CategoriesController {
     }
 
     const words = await this.wordsService.find({ where: { category } });
-    const wordsId = words.map((word) => word.word_id);
+    const wordId = words.map((word) => word.word_id);
 
-    await this.choicesService.delete({ options: In(wordsId) });
-    await this.wordsService.delete({ word_id: In(wordsId) });
+    await this.choicesService.delete({ options: In(wordId) });
+    await this.wordsService.delete({ word_id: In(wordId) });
     await this.categoriesService.delete(category);
 
     return { code: 200, message: 'Category deleted successfully!' };
