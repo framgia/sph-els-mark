@@ -45,7 +45,7 @@ export class CategoriesController {
   }
 
   // Reminder: Add authguard
-  @Get(['student/words/:wordId', 'admin/words/:wordId'])
+  @Get(['student/word/:wordId', 'admin/word/:wordId'])
   async getChoices(@Param('wordId') wordId: number) {
     const words = await this.wordsService.findOne({
       where: { word_id: wordId },
