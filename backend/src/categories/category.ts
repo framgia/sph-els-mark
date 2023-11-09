@@ -19,6 +19,9 @@ export class Category {
   @Column()
   description: string;
 
-  @OneToMany(() => Words, (words) => words.category)
+  @OneToMany(() => Words, (words) => words.category, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
   words: Words[];
 }

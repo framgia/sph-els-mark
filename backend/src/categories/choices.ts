@@ -15,7 +15,7 @@ export class Choices {
   @Column({ type: 'text' })
   options: string;
 
-  @ManyToOne(() => Words, (words) => words.choices)
+  @ManyToOne(() => Words, (words) => words.choices, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'word_id' })
   word: Words;
 }
