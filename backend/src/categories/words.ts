@@ -15,7 +15,7 @@ export class Words {
   @PrimaryGeneratedColumn()
   word_id: number;
 
-  @Column({ default: 1 })
+  @Column({ nullable: false })
   category_id: number;
 
   @Column({ nullable: true })
