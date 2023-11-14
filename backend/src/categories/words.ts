@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { Category } from './category';
 import { Choices } from './choices';
+import { Answers } from '../answer/answers';
 
 @Entity('words')
 export class Words {
@@ -22,7 +23,6 @@ export class Words {
 
   @OneToMany(() => Choices, (choices: Choices) => choices.word, {
     cascade: true,
-    onDelete: 'CASCADE',
   })
   choices: Choices[];
 
@@ -32,4 +32,7 @@ export class Words {
   @ManyToOne(() => Category, (category) => category.words)
   @JoinColumn({ name: 'category_id' })
   category: Category;
+
+  @OneToMany(() => Answers, (answers: Answers) => answers.words)
+  answers: Answers;
 }
