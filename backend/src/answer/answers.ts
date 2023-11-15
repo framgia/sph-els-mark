@@ -1,4 +1,6 @@
+import { Exclude } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
+import { Attempts } from 'src/attempts/attempts';
 import { Words } from 'src/categories/words';
 
 import {
@@ -12,17 +14,21 @@ import {
 @Entity('answers')
 export class Answers {
   @PrimaryGeneratedColumn()
-  answer_id: number;
+  id: number;
 
-  @ManyToOne(() => Words, { cascade: true })
+  @ManyToOne(() => Attempts)
+  @JoinColumn({ name: 'attempt_id' })
+  attempts: Attempts;
+
+  @ManyToOne(() => Words)
   @JoinColumn({ name: 'word_id' })
   words: Words;
 
-  @Column()
+  @Column({ default: 'no answer' })
   @IsNotEmpty()
   answer: string;
 
-  @Column()
+  @Column({ nullable: false })
   @IsNotEmpty()
   question_no: number;
 }
