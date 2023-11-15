@@ -26,34 +26,41 @@ export class AnswerController {
   ) {}
 
   @UseGuards(AuthGuard)
-  @Post('student/category/:category_id/word/:word_id/answer')
+  @Post('student/category/:category_id/word/:word_id/:attempt_id/answer')
   async usersAnswer(
     @Req() request: Request,
-    @Res({ passthrough: true }) response: Response,
-    @Param('category_id') category_id: number,
     @Param('word_id') word_id: number,
+    @Param('category_id') category_id: number,
+    @Param('attempt_id') attempt_id: number,
     @Body() body: usersAnswerDto,
   ) {
     const cookie = request.cookies['jwt'];
     const { id: user_id } = await this.jwtService.verifyAsync(cookie);
-
-    const words = await this.wordsService.findOne({
+    const wordId = await this.wordsService.findOne({
       where: { word_id },
     });
-
-    const userAttempt = this.attemptsService.find({
-      where: { user_id },
+    const category = await this.wordsService.findOne({
+      where: { category_id },
+    });
+    const attempts = await this.attemptsService.findOne({
+      where: { attempt_id },
     });
 
-    if (!words) {
-      throw new NotFoundException(' Word not found!');
+    if (!wordId) {
+      throw new NotFoundException(' Word and not found!');
+    }
+    if (!category) {
+      throw new NotFoundException(' Category and not found!');
     }
 
-    const userAnswer = await this.answerService.save({
-      answer: body.answer,
-      question_no: body.question_no,
-    });
-
-    return { userAnswer };
+    if (user_id) {
+      return await this.answerService.save({
+        attempts: attempts.attempt_id,
+        words: wordId.word_id,
+        answer: body.answer,
+        question_no: body.question_no,
+      });
+    }
+    throw new NotFoundException(' Please Login');
   }
 }

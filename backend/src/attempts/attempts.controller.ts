@@ -57,12 +57,9 @@ export class AttemptsController {
     } else if (!isDone) {
       throw new NotFoundException('Answers are not yet recorded');
     }
-    const saveAttempt = this.attemptsService.save({
-      user: user_id,
-      category: category_id,
+    return this.attemptsService.save({
+      user: user.user_id,
+      category: category.category_id,
     });
-    const userAnswers = await this.answerService.save(saveAttempt);
-
-    return { saveAttempt, userAnswers };
   }
 }
