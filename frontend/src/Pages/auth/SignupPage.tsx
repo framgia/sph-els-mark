@@ -1,38 +1,34 @@
-
+import FormButton from "./components/RegisterButton";
 import InputField from "./components/InputField";
-import RegisterButton from "./components/RegisterButton";
-
-const AdminSignin = () => {
+const SignUp = () => {
   return (
     <>
-      <title>Student Register</title>
+      <head>
+        <title>Student Register</title>
+      </head>
       <form>
-        <div className="min-h-screen p-8 bg-gray-900 flex items-center justify-center">
+        <div className="min-h-screen p-8 bg-gray-100 flex items-center justify-center">
           <div className="container max-w-screen-lg mx-auto">
             <div>
-              <h2 className="font-semibold text-xl text-gray-300">
-                Register as Admin
+              <h2 className="font-semibold text-xl text-gray-600">
+                Create your Account
               </h2>
               <p className="text-gray-500 mb-6">E - LEARNING SYSTEM</p>
 
-              <div className="bg-gray-800 border-gray-400 border-[1px] rounded shadow-lg p-9 px-4 md:p-8 mb-6">
-                <div className=" grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+              <div className="bg-white rounded shadow-lg p-9 px-4 md:p-8 mb-6">
+                <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
                   <div className="text-gray-600">
-                    <p className="font-medium text-lg text-gray-300">
-                      Admin Details
-                    </p>
-                    <p className="text-gray-400">
-                      Please fill out all the fields.
-                    </p>
+                    <p className="font-medium text-lg">Personal Details</p>
+                    <p>Please fill out all the fields.</p>
                   </div>
 
-                  <div className="md:col-span-2 text-gray-300">
+                  <div className="md:col-span-2">
                     <div className="grid gap-4 gap-y-3 text-sm grid-cols-2 md:grid-cols-4">
-                      <InputField
+                    <InputField
                         type="text"
                         name="first_name"
                         id="first_name"
-                        userType="admin"
+                        userType="student"
                         value="First Name"
                         placeholder=""
                         inputType="name"
@@ -41,7 +37,7 @@ const AdminSignin = () => {
                         type="text"
                         name="last_name"
                         id="last_name"
-                        userType="admin"
+                        userType="student"
                         value="Last Name"
                         placeholder=""
                         inputType="name"
@@ -51,7 +47,7 @@ const AdminSignin = () => {
                         type="text"
                         name="email"
                         id="email"
-                        userType="admin"
+                        userType="student"
                         value="Email Address"
                         placeholder="your_email@mail.com"
                         inputType="email"
@@ -60,7 +56,7 @@ const AdminSignin = () => {
                         type="password"
                         name="createPassword"
                         id="createPassword"
-                        userType="admin"
+                        userType="student"
                         value="Create Password"
                         placeholder="Create Password"
                         inputType="name"
@@ -69,14 +65,15 @@ const AdminSignin = () => {
                         type="password"
                         name="confirmPassword"
                         id="confirmPassword"
-                        userType="admin"
+                        userType="student"
                         value="Confirm Password"
                         placeholder="Confirm Password"
                         inputType="name"
                       />
-
                     </div>
-                      <RegisterButton userType="admin" />
+                    <div className="inline-flex items-end mt-6">
+                      <FormButton userType="student" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -88,4 +85,4 @@ const AdminSignin = () => {
   );
 };
 
-export default AdminSignin;
+export default SignUp;
