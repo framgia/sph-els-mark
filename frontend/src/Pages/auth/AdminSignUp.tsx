@@ -1,6 +1,6 @@
 
 import InputField from "./components/InputField";
-import RegisterButton from "./components/RegisterButton";
+import Button from "./components/Button";
 
 const AdminSignin = () => {
   return (
@@ -32,51 +32,53 @@ const AdminSignin = () => {
                         type="text"
                         name="first_name"
                         id="first_name"
-                        userType="admin"
+                        isAdmin
                         value="First Name"
                         placeholder=""
-                        inputType="name"
+                        email={false}
                       />
                       <InputField
                         type="text"
                         name="last_name"
                         id="last_name"
-                        userType="admin"
+                        isAdmin
                         value="Last Name"
                         placeholder=""
-                        inputType="name"
+                        email={false}
                       />
 
                       <InputField
                         type="text"
                         name="email"
                         id="email"
-                        userType="admin"
+                        isAdmin
                         value="Email Address"
                         placeholder="your_email@mail.com"
-                        inputType="email"
+                        email
                       />
                       <InputField
                         type="password"
                         name="createPassword"
                         id="createPassword"
-                        userType="admin"
+                        isAdmin
                         value="Create Password"
                         placeholder="Create Password"
-                        inputType="name"
+                        email={false}
                       />
                       <InputField
                         type="password"
                         name="confirmPassword"
                         id="confirmPassword"
-                        userType="admin"
+                        isAdmin
                         value="Confirm Password"
                         placeholder="Confirm Password"
-                        inputType="name"
+                        email={false}
                       />
 
                     </div>
-                      <RegisterButton userType="admin" />
+                    <div className="inline-flex items-end mt-6">
+                     <Button text="Register as Admin" />
+                     </div>
                   </div>
                 </div>
               </div>

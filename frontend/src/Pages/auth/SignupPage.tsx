@@ -1,11 +1,9 @@
-import FormButton from "./components/RegisterButton";
+import Button from "./components/Button";
 import InputField from "./components/InputField";
 const SignUp = () => {
   return (
     <>
-      <head>
-        <title>Student Register</title>
-      </head>
+   <title>Student Register</title>
       <form>
         <div className="min-h-screen p-8 bg-gray-100 flex items-center justify-center">
           <div className="container max-w-screen-lg mx-auto">
@@ -28,51 +26,51 @@ const SignUp = () => {
                         type="text"
                         name="first_name"
                         id="first_name"
-                        userType="student"
+                        isAdmin={false}
                         value="First Name"
                         placeholder=""
-                        inputType="name"
+                        email={false}
                       />
                       <InputField
                         type="text"
                         name="last_name"
                         id="last_name"
-                        userType="student"
+                        isAdmin={false}
                         value="Last Name"
                         placeholder=""
-                        inputType="name"
+                        email={false}
                       />
 
                       <InputField
                         type="text"
                         name="email"
                         id="email"
-                        userType="student"
+                        isAdmin={false}
                         value="Email Address"
                         placeholder="your_email@mail.com"
-                        inputType="email"
+                        email
                       />
                       <InputField
                         type="password"
                         name="createPassword"
                         id="createPassword"
-                        userType="student"
+                        isAdmin={false}
                         value="Create Password"
                         placeholder="Create Password"
-                        inputType="name"
+                        email={false}
                       />
                       <InputField
                         type="password"
                         name="confirmPassword"
                         id="confirmPassword"
-                        userType="student"
+                        isAdmin={false}
                         value="Confirm Password"
                         placeholder="Confirm Password"
-                        inputType="name"
+                        email={false}
                       />
                     </div>
                     <div className="inline-flex items-end mt-6">
-                      <FormButton userType="student" />
+                      <Button text="Register as Student" />
                     </div>
                   </div>
                 </div>

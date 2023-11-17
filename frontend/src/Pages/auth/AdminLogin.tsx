@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import SignInField from "./components/SignInField";
-import LoginButton from "./components/LoginButton";
+
+import Button from "./components/Button";
 
 const AdminLogin = () => {
   return (
@@ -21,7 +22,7 @@ const AdminLogin = () => {
                   type="email"
                   name="email"
                   placeholder="name@company.com"
-                  userType="admin"
+                  isAdmin
                 />
 
                 <SignInField
@@ -30,10 +31,10 @@ const AdminLogin = () => {
                   type="password"
                   name="password"
                   placeholder="••••••••"
-                  userType="admin"
+                  isAdmin
                 />
 
-                <LoginButton userType="admin" />
+                <Button text="Login as Admin" />
                 <p className="text-sm font-light text-gray-400">
                   <Link to="/admin-register" className="text-blue-600">
                     Register as Admin
