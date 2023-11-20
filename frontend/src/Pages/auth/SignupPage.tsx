@@ -3,7 +3,7 @@ import InputField from "./components/InputField";
 const SignUp = () => {
   return (
     <>
-   <title>Student Register</title>
+      <title>Student Register</title>
       <form>
         <div className="min-h-screen p-8 bg-gray-100 flex items-center justify-center">
           <div className="container max-w-screen-lg mx-auto">
@@ -22,7 +22,7 @@ const SignUp = () => {
 
                   <div className="md:col-span-2">
                     <div className="grid gap-4 gap-y-3 text-sm grid-cols-2 md:grid-cols-4">
-                    <InputField
+                      <InputField
                         type="text"
                         name="first_name"
                         id="first_name"

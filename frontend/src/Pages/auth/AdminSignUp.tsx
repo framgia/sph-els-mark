@@ -1,4 +1,3 @@
-
 import InputField from "./components/InputField";
 import Button from "./components/Button";
 
@@ -74,11 +73,10 @@ const AdminSignin = () => {
                         placeholder="Confirm Password"
                         email={false}
                       />
-
                     </div>
                     <div className="inline-flex items-end mt-6">
-                     <Button text="Register as Admin" />
-                     </div>
+                      <Button text="Register as Admin" />
+                    </div>
                   </div>
                 </div>
               </div>
