@@ -6,6 +6,8 @@ import SignUp from "../Pages/auth/SignupPage";
 import AdminLogin from "../Pages/auth/AdminLogin";
 import AdminSignin from "../Pages/auth/AdminSignUp";
 import Dashboard from "../Pages/Dashboard";
+import ProfilePage from "../Pages/ProfilePage";
+
 
 
 const Main = () => {
@@ -18,6 +20,8 @@ const Main = () => {
       <Route path="/admin-login" element={<AdminLogin/>} />
       <Route path="/admin-register" element={<AdminSignin/>} />
       <Route path="/dashboard" element={<Dashboard/>} />
+      <Route  path="/profile/student/:slug" element={<ProfilePage/>} />
+
     </Routes>
     
   )
