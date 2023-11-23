@@ -10,7 +10,7 @@ const Navbar = () => {
       <ul className="flex p-2 text-[18px]">
         <li className="px-9  hover:text-cyan-300"><Link to={'/categories'}>Categories</Link></li>
         <li className="px-9 hover:text-cyan-300"><Link to={'#wordslearned'}>Words Learned</Link></li>
-        <li className="px-9  hover:text-cyan-300"><Link to={'#editprofile'}>Settings</Link></li>
+        <li className="px-9  hover:text-cyan-300"><Link to={'/settings'}>Settings</Link></li>
       </ul>
     </div>
    </div>
