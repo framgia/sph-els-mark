@@ -24,8 +24,8 @@ const Profile = () => {
           className="h-[150px] bg-gray-200 p-2 rounded"
         />
       </div>
-      {users.slice(1, 2).map((user: Users, id: number) => (
-        <div className="px-8 mt-9" key={id}>
+      {users.slice(1, 2).map((user: Users) => (
+        <div className="px-8 mt-9" key={user.id}>
           <h1 className="font-semibold text-[21px]">
             {user.first_name} {user.last_name}
           </h1>

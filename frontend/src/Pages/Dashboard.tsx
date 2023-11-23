@@ -27,8 +27,8 @@ const Dashboard = () => {
             Activities
           </h1>
           <div>
-            {users.slice(1, 5).map((user: Users, id: number) => (
-              <ul key={id}>
+            {users.slice(1, 5).map((user: Users) => (
+              <ul key={user.id}>
                 <li>
                   <div className="flex w-full items-center">
                     <img
