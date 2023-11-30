@@ -30,7 +30,6 @@ export class AttemptsController {
   async userAttempt(
     @Req() request: Request,
     @Param('category_id') category_id: number,
-    @Param('word_id') word_id: number,
     @Body('isDone') isDone: boolean,
   ) {
     const cookie = request.cookies['jwt'];
@@ -44,16 +43,10 @@ export class AttemptsController {
       where: { user_id },
     });
 
-    const answer = await this.answerService.findOne({
-      where: { word_id },
-    });
-
     if (!user) {
       throw new NotFoundException('User not found!');
     } else if (!category) {
       throw new NotFoundException('Category not found!');
-    } else if (!answer) {
-      throw new NotFoundException('Answers are not yet recorded');
     } else if (!isDone) {
       throw new NotFoundException('Answers are not yet recorded');
     }
