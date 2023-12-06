@@ -1,11 +1,13 @@
 import { Routes, Route } from "react-router-dom";
-import HomePage from "../Pages/Homepage";
-import CategoryPage from "../Pages/Categorypage";
-import LoginPage from "../Pages/auth/LoginPage";
-import SignUp from "../Pages/auth/SignupPage";
-import AdminLogin from "../Pages/auth/AdminLogin";
-import AdminSignin from "../Pages/auth/AdminSignUp";
-import Dashboard from "../Pages/Dashboard";
+import HomePage from "@/Pages/Homepage";
+import CategoryPage from "@/Pages/Categorypage";
+import LoginPage from "@/Pages/auth/LoginPage";
+import SignUp from "@/Pages/auth/SignupPage";
+import AdminLogin from "@/Pages/auth/AdminLogin";
+import AdminSignin from "@/Pages/auth/AdminSignUp";
+import Dashboard from "@/Pages/Dashboard";
+import LessonAnswerPage from "@/Pages/LessonAnswerPage";
+import ResultsPage from "@/Pages/ResultsPage";
 
 
 const Main = () => {
@@ -18,6 +20,8 @@ const Main = () => {
       <Route path="/admin-login" element={<AdminLogin/>} />
       <Route path="/admin-register" element={<AdminSignin/>} />
       <Route path="/dashboard" element={<Dashboard/>} />
+      <Route path="/category/:id/" element={<LessonAnswerPage/>} />
+      <Route path="/result" element={<ResultsPage/>} />
     </Routes>
     
   )
