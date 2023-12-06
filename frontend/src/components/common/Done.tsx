@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+
+
+
 const Done = () => {
   return (
     <>
@@ -10,11 +13,18 @@ const Done = () => {
           “Dreams don't work unless you do.”
         </p>
 
-        <Link to={"#resultspage"}>
+        <Link to={"/result"}>
           <button className="bg-green-500 hover:bg-green-700 px-7 py-4  my-5 rounded-full text-white">
             See Results
           </button>
         </Link>
+        {/* {dummyQuestions.slice(0,1).map((category)=> (
+                  <Link to={`category/${category.category_id}/result`}>
+                  <button className="bg-green-500 hover:bg-green-700 px-7 py-4  my-5 rounded-full text-white">
+                    See Results
+                  </button>
+                </Link>
+        ))} */}
       </div>
     </>
   );

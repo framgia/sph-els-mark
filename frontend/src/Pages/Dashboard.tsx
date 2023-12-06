@@ -1,7 +1,8 @@
-import Navbar from "../components/common/Navbar";
-import Profile from "../components/common/Profile";
-import UserProfile from "../components/user.png";
-import users from "../dummydata";
+import Navbar from "@/components/common/Navbar";
+import Profile from "@/components/common/Profile";
+import users from "@/context/dummydata";
+import UserProfile from "@/components/user.png"
+
 
 interface Users {
   id: number;
@@ -17,7 +18,7 @@ const Dashboard = () => {
   return (
     <>
       <title>Dashboard</title>
-      <Navbar />
+     <Navbar />
       <section className="flex flex-col-2  mt-[2rem]">
         <div>
           <Profile />
@@ -42,16 +43,16 @@ const Dashboard = () => {
                           {" "}
                           {user.first_name}{" "}
                         </span>{" "}
-                          learned{" "}
+                        learned{" "}
                         <span className="text-blue-500 cursor-pointer">
                           {" "}
                           {user.score}{" "}
                         </span>{" "}
-                          of{" "}
+                        of{" "}
                         <span className="text-blue-500 cursor-pointer">
                           {user.total_items}{" "}
                         </span>{" "}
-                          words in{" "}
+                        words in{" "}
                         <span className="text-blue-500 cursor-pointer">
                           {user.category}
                         </span>

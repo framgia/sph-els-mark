@@ -1,9 +1,9 @@
-import Navbar from "../components/common/Navbar";
+import Navbar from "@/components/common/Navbar";
 import { GoCheckCircle } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
-import QuizHeader from "../components/common/QuizHeader";
-import DummyResult from "../dummyresult";
-import Score from "../components/common/Score";
+import QuizHeader from "@/components/common/QuizHeader";
+import DummyResult from "@/context/dummyresult";
+import Score from "@/components/common/Score";
 const ResultsPage = () => {
   const calculateScore = (word: any) => {
     return word.answer === word.correct_answer ? 1 : 0;
@@ -19,6 +19,7 @@ const ResultsPage = () => {
 
   return (
     <>
+    <title>Result</title>
       <Navbar />
       <section>
         <div className="flex col-span-2 justify-evenly mt-[5rem] tracking-wide">

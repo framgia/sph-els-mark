@@ -1,4 +1,4 @@
-const DummyTest = [
+const dummyQuestions = [
   {
     id: 1,
     category_id: 1,
@@ -38,4 +38,4 @@ const DummyTest = [
   },
 ];
 
-export default DummyTest;
+export default dummyQuestions;
