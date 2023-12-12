@@ -1,5 +1,5 @@
-import React from "react";
-import clsx from "clsx";
+import React from 'react';
+import clsx from 'clsx';
 
 interface InputFieldPRops {
   type: string;
@@ -23,8 +23,8 @@ const InputField: React.FC<InputFieldPRops> = ({
   return (
     <div
       className={clsx({
-        "md:col-span-4": email === true,
-        "md:col-span-2": !email,
+        'md:col-span-4': email === true,
+        'md:col-span-2': !email,
       })}
     >
       <label id={id}>{value}</label>
@@ -32,10 +32,10 @@ const InputField: React.FC<InputFieldPRops> = ({
         type={type}
         name={name}
         id={id}
-        className={clsx("h-10 border mt-1 rounded px-4 w-full", {
-          "bg-gray-700 border-gray-600 placeholder-gray-400 text-white ":
+        className={clsx('h-10 border mt-1 rounded px-4 w-full', {
+          'bg-gray-700 border-gray-600 placeholder-gray-400 text-white ':
             isAdmin === true,
-          "bg-gray-50": !isAdmin,
+          'bg-gray-50': !isAdmin,
         })}
         placeholder={placeholder}
       />

@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 export class WordsService extends SharedService {
   constructor(
     @InjectRepository(Words)
-    private readonly wordsRepository: Repository<Words>,
+    private readonly wordsRepository: Repository<Words>
   ) {
     super(wordsRepository);
   }

@@ -22,7 +22,7 @@ export class AttemptsController {
     private categoriesService: CategoriesService,
     private userService: UserService,
     private answerService: AnswerService,
-    private jwtService: JwtService,
+    private jwtService: JwtService
   ) {}
 
   @UseGuards(AuthGuard)
@@ -31,7 +31,7 @@ export class AttemptsController {
     @Req() request: Request,
     @Param('category_id') category_id: number,
     @Param('word_id') word_id: number,
-    @Body('isDone') isDone: boolean,
+    @Body('isDone') isDone: boolean
   ) {
     const cookie = request.cookies['jwt'];
     const { id: user_id } = await this.jwtService.verifyAsync(cookie);

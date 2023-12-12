@@ -7,7 +7,7 @@ import { SharedService } from 'src/shared/shared-service';
 @Injectable()
 export class UserService extends SharedService {
   constructor(
-    @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(User) private readonly userRepository: Repository<User>
   ) {
     super(userRepository);
   }

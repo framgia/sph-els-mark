@@ -1,13 +1,10 @@
 import Main from './Routes/routes';
-function App (){
-
+function App() {
   return (
-    <>  
-      <Main/>
+    <>
+      <Main />
     </>
-  )
-
-
+  );
 }
 
-export default App
+export default App;

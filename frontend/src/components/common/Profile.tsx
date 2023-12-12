@@ -1,5 +1,5 @@
-import UserProfile from "../user.png";
-import users from "../../dummydata";
+import UserProfile from '../user.png';
+import users from '../../dummydata';
 
 interface Users {
   id: number;

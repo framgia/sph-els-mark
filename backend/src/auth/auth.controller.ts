@@ -24,7 +24,7 @@ import { AuthGuard } from './auth.guard';
 export class AuthController {
   constructor(
     private userService: UserService,
-    private jwtService: JwtService,
+    private jwtService: JwtService
   ) {}
 
   @Post(['student/register', 'admin/register'])
@@ -47,7 +47,7 @@ export class AuthController {
     @Body('email') email: string,
     @Body('password') password: string,
     @Res({ passthrough: true }) response: Response,
-    @Req() request: Request,
+    @Req() request: Request
   ) {
     const user = await this.userService.findOne({ where: { email } });
 
@@ -121,7 +121,7 @@ export class AuthController {
     @Body('first_name') first_name: string,
     @Body('last_name') last_name: string,
     @Body('email') email: string,
-    @Body('avatar') avatar: string,
+    @Body('avatar') avatar: string
   ) {
     const cookie = request.cookies['jwt'];
     const { id: user_id } = await this.jwtService.verifyAsync(cookie);
@@ -141,7 +141,7 @@ export class AuthController {
   async changePassword(
     @Req() request: Request,
     @Body('password') password: string,
-    @Body('password_confirm') password_confirm: string,
+    @Body('password_confirm') password_confirm: string
   ) {
     if (password !== password_confirm) {
       throw new BadRequestException('Password do not match');

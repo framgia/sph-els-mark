@@ -1,0 +1,38 @@
+{
+  "name": "e-learning",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lint-staged.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install",
+    "precommit": "npm run lint && npm test"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/framgia/sph-els-mark.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/framgia/sph-els-mark/issues"
+  },
+  "homepage": "https://github.com/framgia/sph-els-mark#readme",
+  "dependencies": {
+    "mrm-task-lint-staged": "^7.1.22"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit"
+    }
+  }
+}
