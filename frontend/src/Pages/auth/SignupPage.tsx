@@ -1,5 +1,6 @@
 import Button from './components/Button';
 import InputField from './components/InputField';
+import React from 'react';
 const SignUp = () => {
   return (
     <>

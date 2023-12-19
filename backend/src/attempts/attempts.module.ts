@@ -4,7 +4,6 @@ import { Attempts } from './attempts';
 import { AttemptsController } from './attempts.controller';
 import { AttemptsService } from './attempts.service';
 import { UserService } from 'src/user/user.service';
-import { WordsService } from 'src/categories/words.service';
 import { User } from 'src/user/user';
 
 import { AnswerService } from 'src/answer/answer.service';

@@ -6,6 +6,7 @@ import SignUp from '../Pages/auth/SignupPage';
 import AdminLogin from '../Pages/auth/AdminLogin';
 import AdminSignin from '../Pages/auth/AdminSignUp';
 import Dashboard from '../Pages/Dashboard';
+import React from 'react';
 
 const Main = () => {
   return (

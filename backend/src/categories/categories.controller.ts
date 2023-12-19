@@ -3,7 +3,6 @@ import {
   Get,
   Body,
   Post,
-  Req,
   Param,
   NotFoundException,
   Put,
@@ -14,7 +13,6 @@ import { CreateCategoryDto } from './dto/category-create.dto';
 import { AddWordDto } from './dto/add-word.dto';
 import { WordsService } from './words.service';
 import { ChoicesService } from './choices.service';
-import { HttpException, HttpStatus } from '@nestjs/common';
 import { In } from 'typeorm';
 @Controller()
 export class CategoriesController {

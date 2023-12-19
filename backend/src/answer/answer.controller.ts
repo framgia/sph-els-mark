@@ -1,13 +1,11 @@
 import {
   Body,
   Controller,
-  Get,
   NotFoundException,
   Param,
   Post,
   UseGuards,
   Req,
-  Res,
 } from '@nestjs/common';
 import { AnswerService } from './answer.service';
 import { WordsService } from 'src/categories/words.service';
@@ -15,7 +13,7 @@ import { usersAnswerDto } from './dto/usersAnswer.dto';
 import { AttemptsService } from 'src/attempts/attempts.service';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { JwtService } from '@nestjs/jwt/dist';
-import { Response, Request } from 'express';
+import { Request } from 'express';
 @Controller()
 export class AnswerController {
   constructor(

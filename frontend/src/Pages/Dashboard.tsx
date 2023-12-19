@@ -2,6 +2,7 @@ import Navbar from '../components/common/Navbar';
 import Profile from '../components/common/Profile';
 import UserProfile from '../components/user.png';
 import users from '../dummydata';
+import React from 'react';
 
 interface Users {
   id: number;

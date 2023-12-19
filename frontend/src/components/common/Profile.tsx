@@ -1,5 +1,6 @@
 import UserProfile from '../user.png';
 import users from '../../dummydata';
+import React from 'react';
 
 interface Users {
   id: number;
