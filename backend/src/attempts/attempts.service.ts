@@ -8,7 +8,7 @@ import { Attempts } from './attempts';
 export class AttemptsService extends SharedService {
   constructor(
     @InjectRepository(Attempts)
-    private readonly attemptsRepository: Repository<Attempts>,
+    private readonly attemptsRepository: Repository<Attempts>
   ) {
     super(attemptsRepository);
   }

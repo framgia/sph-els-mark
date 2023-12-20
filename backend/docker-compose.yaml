@@ -3,21 +3,20 @@ services:
   backend:
     build: .
     ports:
-       - 8000:3000
+      - 8000:3000
     volumes:
       - .:/app
     depends_on:
-     - db
+      - db
   db:
     image: mysql:8.0.33
     restart: always
     environment:
-       MYSQL_DATABASE: elearning
-       MYSQL__USER: root
-       MYSQL_PASSWORD: root
-       MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: elearning
+      MYSQL__USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
     volumes:
       - .dbdata:/var/lib/mysql
     ports:
       - 33066:3306
-      

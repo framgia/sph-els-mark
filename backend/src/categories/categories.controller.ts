@@ -3,7 +3,6 @@ import {
   Get,
   Body,
   Post,
-  Req,
   Param,
   NotFoundException,
   Put,
@@ -14,14 +13,13 @@ import { CreateCategoryDto } from './dto/category-create.dto';
 import { AddWordDto } from './dto/add-word.dto';
 import { WordsService } from './words.service';
 import { ChoicesService } from './choices.service';
-import { HttpException, HttpStatus } from '@nestjs/common';
 import { In } from 'typeorm';
 @Controller()
 export class CategoriesController {
   constructor(
     private categoriesService: CategoriesService,
     private wordsService: WordsService,
-    private choicesService: ChoicesService,
+    private choicesService: ChoicesService
   ) {}
   // Reminder: Add authguard
   @Get(['student/categories', 'admin/categories'])
@@ -74,7 +72,7 @@ export class CategoriesController {
   @Post('admin/category/:category_id/add')
   async createWord(
     @Param('category_id') category_id: number,
-    @Body() body: AddWordDto,
+    @Body() body: AddWordDto
   ) {
     const category = await this.categoriesService.findOne({
       where: { category_id },
@@ -95,7 +93,7 @@ export class CategoriesController {
   async editCategory(
     @Param('category_id') category_id: number,
     @Body('title') title: string,
-    @Body('description') description: string,
+    @Body('description') description: string
   ) {
     const category = await this.categoriesService.findOne({
       where: { category_id },
@@ -137,7 +135,7 @@ export class CategoriesController {
   async editWord(
     @Param('category_id') category_id: number,
     @Param('word_id') word_id: number,
-    @Body() body: AddWordDto,
+    @Body() body: AddWordDto
   ) {
     const category = await this.categoriesService.findOne({
       where: { category_id },
@@ -168,7 +166,7 @@ export class CategoriesController {
   @Delete('admin/category/:category_id/word/:word_id/delete')
   async deleteWordandChoices(
     @Param('category_id') category_id: number,
-    @Param('word_id') word_id: number,
+    @Param('word_id') word_id: number
   ) {
     const category = await this.categoriesService.findOne({
       where: { category_id },

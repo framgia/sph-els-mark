@@ -8,7 +8,7 @@ import { Followers } from './follow';
 export class FollowersService extends SharedService {
   constructor(
     @InjectRepository(Followers)
-    private readonly followRepository: Repository<Followers>,
+    private readonly followRepository: Repository<Followers>
   ) {
     super(followRepository);
   }

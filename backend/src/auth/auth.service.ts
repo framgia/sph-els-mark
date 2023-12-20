@@ -6,7 +6,7 @@ import { Request } from 'supertest';
 export class AuthService {
   constructor(
     private jwtService: JwtService,
-    private userService: UserService,
+    private userService: UserService
   ) {}
 
   async user(request: Request) {

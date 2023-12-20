@@ -1,6 +1,7 @@
-import Button from "./components/Button";
-import SignInField from "./components/SignInField";
-import { Link } from "react-router-dom";
+import Button from './components/Button';
+import SignInField from './components/SignInField';
+import { Link } from 'react-router-dom';
+import React from 'react';
 
 const LoginPage = () => {
   return (
@@ -54,7 +55,7 @@ const LoginPage = () => {
                 </div>
                 <Button text="Sign in as Student" />
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Don’t have an account yet?{" "}
+                  Don’t have an account yet?{' '}
                   <Link to="/register" className="text-blue-600">
                     Signup
                   </Link>

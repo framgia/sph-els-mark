@@ -1,7 +1,8 @@
-import Navbar from "../components/common/Navbar";
-import Profile from "../components/common/Profile";
-import UserProfile from "../components/user.png";
-import users from "../dummydata";
+import Navbar from '../components/common/Navbar';
+import Profile from '../components/common/Profile';
+import UserProfile from '../components/user.png';
+import users from '../dummydata';
+import React from 'react';
 
 interface Users {
   id: number;
@@ -39,19 +40,19 @@ const Dashboard = () => {
                     <div>
                       <h1 className="text-[18px]">
                         <span className="text-blue-500 cursor-pointer">
-                          {" "}
-                          {user.first_name}{" "}
-                        </span>{" "}
-                          learned{" "}
+                          {' '}
+                          {user.first_name}{' '}
+                        </span>{' '}
+                        learned{' '}
                         <span className="text-blue-500 cursor-pointer">
-                          {" "}
-                          {user.score}{" "}
-                        </span>{" "}
-                          of{" "}
+                          {' '}
+                          {user.score}{' '}
+                        </span>{' '}
+                        of{' '}
                         <span className="text-blue-500 cursor-pointer">
-                          {user.total_items}{" "}
-                        </span>{" "}
-                          words in{" "}
+                          {user.total_items}{' '}
+                        </span>{' '}
+                        words in{' '}
                         <span className="text-blue-500 cursor-pointer">
                           {user.category}
                         </span>
