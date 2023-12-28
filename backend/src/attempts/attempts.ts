@@ -23,9 +23,9 @@ export class Attempts {
 
   @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
-  user: User;
+  user: User[];
 
   @ManyToOne(() => Category)
   @JoinColumn({ name: 'category_id' })
-  category: Category;
+  category: Category[];
 }

@@ -1,13 +1,5 @@
-import {
-  Controller,
-  Get,
-  Body,
-  Post,
-  BadRequestException,
-} from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { UserService } from './user.service';
-import { AdminRegisterDto } from './dtos/admin.dto';
-import * as bcrypt from 'bcryptjs';
 @Controller()
 export class UserController {
   constructor(private readonly userService: UserService) {}

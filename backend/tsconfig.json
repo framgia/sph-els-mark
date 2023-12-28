@@ -4,7 +4,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "target": "es2017", // or your target version
+    "target": "ES2018",
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "./dist",
@@ -16,14 +16,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "declaration": true,
+    "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "allowSyntheticDefaultImports": true,
-    "lib": ["es2017"],
-    "typeRoots": ["node_modules/@types", "./types"],
-    "types": ["node"],
-    "noEmit": false
+    "noEmit": false,
+    "noImplicitReturns": false,
+    "strictPropertyInitialization": false
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["src", ".eslintrc.js"],
+  "exclude": ["node_modules", "dist/"]
 }

@@ -32,8 +32,14 @@ export class AuthController {
     if (body.password !== body.password_confirm) {
       throw new BadRequestException('Password do not match');
     }
-
+    const userEmail = await this.userService.findOne({
+      where: { email: body.email },
+    });
+    if (userEmail) {
+      throw new BadRequestException('Email Already Exist');
+    }
     const hashed = await bcrypt.hash(body.password, 12);
+
     return this.userService.save({
       ...body,
       password: hashed,

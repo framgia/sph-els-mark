@@ -26,9 +26,8 @@
     "format:check": "npm run prettier -- --check",
     "format:fix": "npm run prettier -- --write",
     "lint": "eslint --ext .tsx,.ts .",
-    "type:check": "tsc",
-    "validate": "run-p lint type:check format:check",
-    "sample": "tsc --noEmit --incremental"
+    "type:check": "tsc --noEmit",
+    "validate": "run-p lint type:check format:check"
   },
   "eslintConfig": {
     "extends": [
@@ -67,9 +66,10 @@
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css}": [
       "prettier --write",
-      "eslint --fix "
+      "eslint --fix ",
+      "npm run type:check"
     ],
-    "*.css": [] 
+    "*.css": []
   },
   "husky": {
     "hooks": {

@@ -14,6 +14,7 @@ import { AddWordDto } from './dto/add-word.dto';
 import { WordsService } from './words.service';
 import { ChoicesService } from './choices.service';
 import { In } from 'typeorm';
+import { Choices } from './choices';
 @Controller()
 export class CategoriesController {
   constructor(
@@ -55,7 +56,7 @@ export class CategoriesController {
         word_id: words.word_id,
         given_word: words.given_word,
         correct_word: words.correct_word,
-        choices: words.choices.map((choice) => {
+        choices: words.choices.map((choice: Choices) => {
           return {
             id: choice.id,
             options: choice.options,
