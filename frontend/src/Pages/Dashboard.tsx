@@ -18,7 +18,7 @@ const Dashboard = () => {
   return (
     <>
       <title>Dashboard</title>
-      <Navbar />
+      <Navbar title="E-Learning System" />
       <section className="flex flex-col-2  mt-[2rem]">
         <div>
           <Profile />
