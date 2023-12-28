@@ -24,6 +24,7 @@ module.exports = {
       parserOptions: {
         sourceType: 'script',
         warnOnUnsupportedTypeScriptVersion: false,
+        project: './tsconfig.json',
       },
     },
     {
@@ -32,6 +33,7 @@ module.exports = {
     },
   ],
   root: true,
+  ignorePatterns: ['dist/', 'test/'],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',

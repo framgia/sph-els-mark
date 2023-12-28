@@ -8,12 +8,13 @@ import {
   Req,
 } from '@nestjs/common';
 import { AnswerService } from './answer.service';
-import { WordsService } from 'src/categories/words.service';
+import { WordsService } from '../categories/words.service';
 import { usersAnswerDto } from './dto/usersAnswer.dto';
-import { AttemptsService } from 'src/attempts/attempts.service';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AttemptsService } from '../attempts/attempts.service';
+import { AuthGuard } from '../auth/auth.guard';
 import { JwtService } from '@nestjs/jwt/dist';
 import { Request } from 'express';
+
 @Controller()
 export class AnswerController {
   constructor(

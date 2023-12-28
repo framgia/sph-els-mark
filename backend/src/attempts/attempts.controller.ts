@@ -13,6 +13,7 @@ import { AnswerService } from 'src/answer/answer.service';
 import { UserService } from 'src/user/user.service';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { JwtService } from '@nestjs/jwt/dist';
+import { Request } from 'express';
 @Controller()
 export class AttemptsController {
   constructor(

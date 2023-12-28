@@ -1,14 +1,6 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  JoinColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Words } from './words';
 import { Attempts } from '../attempts/attempts';
-import { Answers } from 'src/answer/answers';
 
 @Entity('categories')
 export class Category {

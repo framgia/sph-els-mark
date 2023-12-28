@@ -1,4 +1,3 @@
-import { Exclude } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
 import { Attempts } from 'src/attempts/attempts';
 import { Words } from 'src/categories/words';

@@ -1,5 +1,4 @@
-import { IsNotEmpty, IsArray, ValidateNested, IsObject } from 'class-validator';
-import { Choices } from '../choices';
+import { IsNotEmpty, IsArray, ValidateNested } from 'class-validator';
 
 export class AddWordDto {
   @IsNotEmpty()
