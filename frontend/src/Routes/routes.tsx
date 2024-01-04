@@ -8,6 +8,7 @@ import AdminSignin from '../Pages/auth/AdminSignUp';
 import Dashboard from '../Pages/Dashboard';
 import AddCategoryPage from '../Pages/AddCategoryPage';
 import React from 'react';
+import CategoryListPage from '../Pages/CategoryListPage';
 
 const Main = () => {
   return (
@@ -20,6 +21,8 @@ const Main = () => {
       <Route path="/admin-register" element={<AdminSignin />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/admin/category/add" element={<AddCategoryPage />} />
+      <Route path="/admin/categories" element={<CategoryListPage />} />
+      
     </Routes>
   );
 };
