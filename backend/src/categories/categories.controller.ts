@@ -8,7 +8,6 @@ import {
   Put,
   Delete,
   UseGuards,
-  Req,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/category-create.dto';
@@ -17,10 +16,10 @@ import { WordsService } from './words.service';
 import { ChoicesService } from './choices.service';
 import { In } from 'typeorm';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { Request } from 'express';
+import { request } from 'http';
 import { JwtService } from '@nestjs/jwt';
+import { Request } from 'express';
 import { UserService } from 'src/user/user.service';
-import { Choices } from './choices';
 @Controller()
 export class CategoriesController {
   constructor(
@@ -28,7 +27,7 @@ export class CategoriesController {
     private wordsService: WordsService,
     private choicesService: ChoicesService,
     private jwtService: JwtService,
-    private userService: UserService,
+    private readonly userService: UserService,
   ) {}
   // Reminder: Add authguard
   @Get(['student/categories', 'admin/categories'])
@@ -64,10 +63,12 @@ export class CategoriesController {
     return this.categoriesService.save(body);
   }
 
-
-  // Reminder: Add authguard
+  @UseGuards(AuthGuard)
   @Get(['student/word/:wordId', 'admin/word/:wordId'])
-  async getChoices(@Param('wordId') wordId: number) {
+  async getChoices(@Param('wordId') wordId: number, @Req() request: Request) {
+    const cookie = request.cookies['jwt'];
+    const { id: user_id } = await this.jwtService.verifyAsync(cookie);
+    const user = this.userService.findOne({ where: { user_id } });
     const words = await this.wordsService.findOne({
       where: { word_id: wordId },
       relations: ['choices'],
@@ -85,12 +86,16 @@ export class CategoriesController {
           };
         }),
       };
-
-      return formattedData;
+      if (user) {
+        return formattedData;
+      } else {
+        throw new NotFoundException('Forbidden Resources');
+      }
     }
 
     throw new NotFoundException('Word not found!');
   }
+
   // Reminder: Add authguard
   @Post('admin/category/:category_id/add')
   async createWord(
@@ -213,3 +218,5 @@ export class CategoriesController {
     return { code: 200, message: 'Word deleted successfully!' };
   }
 }
+
+
