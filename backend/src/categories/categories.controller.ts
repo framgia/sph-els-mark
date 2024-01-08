@@ -2,13 +2,14 @@ import {
   Controller,
   Get,
   Body,
+  Req,
   Post,
   Param,
   NotFoundException,
   Put,
   Delete,
   UseGuards,
-  Req,
+  ForbiddenException,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/category-create.dto';
@@ -16,8 +17,8 @@ import { AddWordDto } from './dto/add-word.dto';
 import { WordsService } from './words.service';
 import { ChoicesService } from './choices.service';
 import { In } from 'typeorm';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { Request } from 'express';
+import { AuthGuard} from 'src/auth/auth.guard';
+import { Request} from 'express';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import { Choices } from './choices';
@@ -91,16 +92,25 @@ export class CategoriesController {
 
     throw new NotFoundException('Word not found!');
   }
-  // Reminder: Add authguard
+
+
+  @UseGuards(AuthGuard)
   @Post('admin/category/:category_id/add')
   async createWord(
     @Param('category_id') category_id: number,
-    @Body() body: AddWordDto
+    @Body() body: AddWordDto,
+    @Req() request: Request,
   ) {
+    const cookie = request.cookies['jwt'];
+    const {id: user_id} = await this.jwtService.verifyAsync(cookie);
+    await this.userService.findOne({where: {user_id}});
+    const admin = await this.userService.findOne({where: {is_admin: true}})
     const category = await this.categoriesService.findOne({
-      where: { category_id },
+      where: { category_id }
     });
-
+    if(!admin){
+      throw new NotFoundException('Forbidden resource');
+    }
     if (!category) {
       throw new NotFoundException('Category not found!');
     }
@@ -112,6 +122,7 @@ export class CategoriesController {
     });
   }
 
+  
   @Put('admin/category/:category_id/edit')
   async editCategory(
     @Param('category_id') category_id: number,
