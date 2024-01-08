@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 interface NavbarProps {
   title: string;
 }
-
 const Navbar: React.FC<NavbarProps> = ({ title }) => {
   return (
     <div className="flex flex-col-2 bg-primary-600 px-9 py-5 items-baseline justify-between text-white">
