@@ -8,7 +8,8 @@ import AdminSignin from "../Pages/auth/AdminSignUp";
 import Dashboard from "../Pages/Dashboard";
 import AddWordPage from "../Pages/AddWordPage";
 import React from "react";
-const Main = () => {
+
+const Main :React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
@@ -18,7 +19,7 @@ const Main = () => {
       <Route path="/admin-login" element={<AdminLogin />} />
       <Route path="/admin-register" element={<AdminSignin />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/admin/category/{category_id}/add" element={<AddWordPage />} />
+      <Route path="/admin/category/:category_id/add" element={<AddWordPage/>} />
     </Routes>
   );
 };
