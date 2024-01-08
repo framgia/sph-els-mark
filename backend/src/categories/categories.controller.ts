@@ -15,7 +15,8 @@ import { CreateCategoryDto } from './dto/category-create.dto';
 import { AddWordDto } from './dto/add-word.dto';
 import { WordsService } from './words.service';
 import { ChoicesService } from './choices.service';
-import { In } from 'typeorm';
+import { HttpException, HttpStatus } from '@nestjs/common';
+import { Admin, In } from 'typeorm';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
@@ -30,9 +31,17 @@ export class CategoriesController {
     private jwtService: JwtService,
     private userService: UserService,
   ) {}
-  // Reminder: Add authguard
+
+  @UseGuards(AuthGuard)
   @Get(['student/categories', 'admin/categories'])
-  async all() {
+  async all(@Body() body: CategoriesService, @Req() request: Request) {
+    const cookie = request.cookies['jwt'];
+    const { id: user_id } = await this.jwtService.verifyAsync(cookie);
+    const user = this.userService.findOne({ where: { user_id } });
+
+    if (!user) {
+      throw new NotFoundException('Forbidden Resource');
+    }
     return this.categoriesService.find({});
   }
   // Reminder: Add authguard
