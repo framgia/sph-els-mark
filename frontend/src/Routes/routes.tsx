@@ -6,20 +6,21 @@ import SignUp from "../Pages/auth/SignupPage";
 import AdminLogin from "../Pages/auth/AdminLogin";
 import AdminSignin from "../Pages/auth/AdminSignUp";
 import Dashboard from "../Pages/Dashboard";
-import AddWordPage from "../Pages/AddWordPage";
+import AdminUserPage from "../Pages/AdminUserPage";
 import React from "react";
+
 
 const Main :React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/categories" element={<CategoryPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<SignUp />} />
-      <Route path="/admin-login" element={<AdminLogin />} />
-      <Route path="/admin-register" element={<AdminSignin />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/admin/category/:category_id/add" element={<AddWordPage/>} />
+      <Route path="/" element={<HomePage/>} />
+      <Route path="/categories" element={<CategoryPage/>} />
+      <Route path="/login" element={<LoginPage/>} />
+      <Route path="/register" element={<SignUp/>} />
+      <Route path="/admin-login" element={<AdminLogin/>} />
+      <Route path="/admin-register" element={<AdminSignin/>} />
+      <Route path="/dashboard" element={<Dashboard/>} />
+      <Route path="/admin/users-list" element={<AdminUserPage/>} />
     </Routes>
   );
 };
