@@ -11,6 +11,7 @@ import { JwtModule} from '@nestjs/jwt';
 import { User } from 'src/user/user';
 import { UserService } from 'src/user/user.service';
 
+
 @Module({
   imports: [JwtModule.register({
     secret: 'secret',
