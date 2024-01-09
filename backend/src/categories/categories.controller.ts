@@ -9,14 +9,12 @@ import {
   Put,
   Delete,
   UseGuards,
-  ForbiddenException,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/category-create.dto';
 import { AddWordDto } from './dto/add-word.dto';
 import { WordsService } from './words.service';
 import { ChoicesService } from './choices.service';
-import { HttpException, HttpStatus } from '@nestjs/common';
 import { Admin, In } from 'typeorm';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Request } from 'express';
