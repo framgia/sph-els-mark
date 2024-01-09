@@ -7,6 +7,8 @@ import {
   NotFoundException,
   Put,
   Delete,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/category-create.dto';
@@ -14,13 +16,19 @@ import { AddWordDto } from './dto/add-word.dto';
 import { WordsService } from './words.service';
 import { ChoicesService } from './choices.service';
 import { In } from 'typeorm';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { Request } from 'express';
+import { JwtService } from '@nestjs/jwt';
+import { UserService } from 'src/user/user.service';
 import { Choices } from './choices';
 @Controller()
 export class CategoriesController {
   constructor(
     private categoriesService: CategoriesService,
     private wordsService: WordsService,
-    private choicesService: ChoicesService
+    private choicesService: ChoicesService,
+    private jwtService: JwtService,
+    private userService: UserService,
   ) {}
   // Reminder: Add authguard
   @Get(['student/categories', 'admin/categories'])
@@ -37,11 +45,25 @@ export class CategoriesController {
       relations: ['words'],
     });
   }
-  // Reminder: Add authguard
+  
+  @UseGuards(AuthGuard)
   @Post('admin/category/create')
-  async create(@Body() body: CreateCategoryDto) {
+  async create(
+    @Body() body: CreateCategoryDto,
+    @Req() request: Request,
+    
+    ) {
+    const cookie = request.cookies['jwt'];
+    const {id: user_id} = await this.jwtService.verifyAsync(cookie);
+    
+    const user = this.userService.findOne({ where: { user_id } });
+    if(!user){
+      throw new NotFoundException('Forbidden Resource');
+    }
+  
     return this.categoriesService.save(body);
   }
+
 
   // Reminder: Add authguard
   @Get(['student/word/:wordId', 'admin/word/:wordId'])
