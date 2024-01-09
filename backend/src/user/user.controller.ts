@@ -1,9 +1,6 @@
 import {
   Controller,
   Get,
-  Body,
-  Post,
-  BadRequestException,
   UseGuards,
   NotFoundException,
   Req,
@@ -37,11 +34,9 @@ export class UserController {
       where: { is_admin: false },
     });
 
-    if (!admin) {
-      throw new NotFoundException('Only admins can access this endpoint');
-    } else if (!user) {
+    if (!admin && !user) {
       throw new NotFoundException('Forbidden Resource');
-    }
+    } 
     const students = await this.userService.find({
       where: { is_admin: false },
     });
