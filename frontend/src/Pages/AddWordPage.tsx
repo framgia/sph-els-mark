@@ -1,13 +1,13 @@
-import React , { useState } from "react";
-import { Radio, RadioGroup, FormControlLabel } from "@mui/material";
-import ButtonAddWord from "../components/common/ButtonAddWord";
-import InputFieldAddWord from "../components/common/InputFieldAddWord";
-import Navbar from "../components/common/Navbar";
+import React, { useState } from 'react';
+import { Radio, RadioGroup, FormControlLabel } from '@mui/material';
+import ButtonAddWord from '@/components/common/ButtonAddWord';
+import InputFieldAddWord from '@/components/common/InputFieldAddWord';
+import Navbar from '@/components/common/Navbar';
 
 interface AddWordPageProps {}
 
 const AddWordPage: React.FC<AddWordPageProps> = () => {
-  const [selectedOption, setSelectedOption] = useState<string>("");
+  const [selectedOption, setSelectedOption] = useState<string>('');
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value);
@@ -56,8 +56,6 @@ const AddWordPage: React.FC<AddWordPageProps> = () => {
       </div>
     </>
   );
-  
 };
-
 
 export default AddWordPage;
