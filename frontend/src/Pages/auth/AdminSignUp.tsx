@@ -1,5 +1,5 @@
-import InputField from './components/InputField';
-import Button from './components/Button';
+import InputField from '@/Pages/auth/components/InputField';
+import Button from '@/Pages/auth/components/Button';
 import React from 'react';
 
 const AdminSignin = () => {

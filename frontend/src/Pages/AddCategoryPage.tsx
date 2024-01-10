@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '../components/common/Navbar';
-import InputField from './auth/components/InputField';
-import CategoryButton from '../components/common/AddCategoryButton';
+import Navbar from '@/components/common/Navbar';
+import InputField from '@/Pages/auth/components/InputField';
+import CategoryButton from '@/components/common/AddCategoryButton';
 
 const AddCategoryPage = () => {
   return (

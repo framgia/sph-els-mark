@@ -1,5 +1,5 @@
-import Button from './components/Button';
-import SignInField from './components/SignInField';
+import Button from '@/Pages/auth/components/Button';
+import SignInField from '@/Pages/auth/components/SignInField';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
