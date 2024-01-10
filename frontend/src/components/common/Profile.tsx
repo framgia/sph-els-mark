@@ -1,5 +1,5 @@
 import UserProfile from '../user.png';
-import users from '../../dummydata';
+import users from '@/context/dummydata';
 import React from 'react';
 
 interface Users {

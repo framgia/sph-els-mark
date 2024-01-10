@@ -11,7 +11,7 @@ const Done = () => {
           “Dreams don't work unless you do.”
         </p>
 
-        <Link to={'#resultspage'}>
+        <Link to={'/category/1/result'}>
           <button className="bg-green-500 hover:bg-green-700 px-7 py-4  my-5 rounded-full text-white">
             See Results
           </button>
