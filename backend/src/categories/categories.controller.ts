@@ -15,7 +15,7 @@ import { CreateCategoryDto } from './dto/category-create.dto';
 import { AddWordDto } from './dto/add-word.dto';
 import { WordsService } from './words.service';
 import { ChoicesService } from './choices.service';
-import { Admin, In } from 'typeorm';
+import { In } from 'typeorm';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
