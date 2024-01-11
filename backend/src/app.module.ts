@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -8,9 +8,19 @@ import { FollowersModule } from './followers/followers.module';
 import { CategoriesModule } from './categories/categories.module';
 import { AnswerModule } from './answer/answer.module';
 import { AttemptsModule } from './attempts/attempts.module';
+import { LoggerMiddleware } from './middleware/logger.middleware';
+import { JwtModule } from '@nestjs/jwt';
+import { CategoriesController } from './categories/categories.controller';
+import { UserController } from './user/user.controller';
+import { AttemptsController } from './attempts/attempts.controller';
+import { AnswerController } from './answer/answer.controller';
 
 @Module({
   imports: [
+    JwtModule.register({
+      secret: 'secret',
+      signOptions: { expiresIn: '1d' },
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'db',
@@ -31,4 +41,15 @@ import { AttemptsModule } from './attempts/attempts.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes(
+        CategoriesController,
+        UserController,
+        AttemptsController,
+        AnswerController
+      );
+  }
+}
