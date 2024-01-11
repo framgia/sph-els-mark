@@ -13,11 +13,13 @@ import { UserService } from 'src/user/user.service';
 
 
 @Module({
-  imports: [JwtModule.register({
-    secret: 'secret',
-    signOptions: { expiresIn: '1d' },
-  }),
-  TypeOrmModule.forFeature([Category, Words, Choices, User])],
+  imports: [
+    JwtModule.register({
+      secret: 'secret',
+      signOptions: { expiresIn: '1d' },
+    }),
+    TypeOrmModule.forFeature([Category, Words, Choices, User]),
+  ],
   controllers: [CategoriesController],
   providers: [CategoriesService, WordsService, ChoicesService, UserService],
 })
