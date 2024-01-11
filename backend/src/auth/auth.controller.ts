@@ -3,7 +3,6 @@ import {
   Post,
   Body,
   BadRequestException,
-  NotFoundException,
   Res,
   Get,
   Req,
@@ -56,15 +55,15 @@ export class AuthController {
   ) {
     const user = await this.userService.findOne({ where: { email } });
 
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
-
     if (!(await bcrypt.compare(password, user.password))) {
       throw new BadRequestException('Invalid Credentials');
     }
 
     const adminLogin = request.path === '/api/admin/login';
+
+    if ((!user.is_admin && adminLogin) || user.is_admin === !adminLogin) {
+      throw new BadRequestException('Invalid Credentials');
+    }
 
     const jwt = await this.jwtService.signAsync({
       id: user.user_id,
@@ -77,21 +76,6 @@ export class AuthController {
     };
   }
 
-  // @UseGuards(AuthGuard)
-  // @Get(['student/user', 'admin/user'])
-  // async user(@Req() request: Request) {
-  //   const cookie = request.cookies['jwt'];
-  //   console.log('JWT Token:', cookie);
-  //   const { id: user_id } = await this.jwtService.verifyAsync(cookie);
-  //   console.log('Decoded user_id:', user_id);
-  //   if (request.path === '/api/admin') {
-  //     return this.userService.findOne({ where: { user_id } });
-  //   }
-
-  //   const user = await this.userService.findOne({ where: { user_id } });
-
-  //   return user;
-  // }
   // For student users
   @UseGuards(AuthGuard)
   @Get('student/user')
