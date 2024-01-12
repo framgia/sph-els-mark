@@ -9,6 +9,7 @@ import Dashboard from '@/Pages/Dashboard';
 import AdminUserPage from '@/Pages/AdminUserPage';
 import React from 'react';
 import LessonAnswerPage from '@/Pages/LessonAnswerPage';
+import ProfilePage from '@/Pages/ProfilePage';
 
 const Main: React.FC = () => {
   return (
@@ -22,6 +23,7 @@ const Main: React.FC = () => {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/admin/users-list" element={<AdminUserPage />} />
       <Route path="/student/category/:id/" element={<LessonAnswerPage />} />
+      <Route path="/student/user/:slug" element={<ProfilePage />} />
     </Routes>
   );
 };

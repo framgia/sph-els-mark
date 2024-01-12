@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import React from 'react';
 
 interface UserProfiles {
   id?: number;
@@ -26,21 +27,21 @@ const Activities: React.FC<ActivitiesProps> = ({ UserProfile, ...user }) => {
               <div>
                 <h1 className="text-[18px]">
                   <span className="text-blue-500 cursor-pointer">
-                    {" "}
-                    <Link to={`/profile/student/${user.first_name}`}>
+                    {' '}
+                    <Link to={`/student/user/${user.first_name}`}>
                       {user.first_name}
-                    </Link>{" "}
-                  </span>{" "}
-                  learned{" "}
+                    </Link>{' '}
+                  </span>{' '}
+                  learned{' '}
                   <span className="text-blue-500 cursor-pointer">
-                    {" "}
-                    {user.score}{" "}
-                  </span>{" "}
-                  of{" "}
+                    {' '}
+                    {user.score}{' '}
+                  </span>{' '}
+                  of{' '}
                   <span className="text-blue-500 cursor-pointer">
-                    {user.total_items}{" "}
-                  </span>{" "}
-                  words in{" "}
+                    {user.total_items}{' '}
+                  </span>{' '}
+                  words in{' '}
                   <span className="text-blue-500 cursor-pointer">
                     {user.category}
                   </span>

@@ -1,7 +1,8 @@
-import Navbar from '@/components/common/Navbar';
-import Profile from '@/components/common/Profile';
-import UserProfile from '@/components/user.png';
-import users from '@/dummydata';
+import Navbar from '../components/common/Navbar';
+import Profile from '../components/common/Profile';
+import UserProfile from '../components/user.png';
+import users from '../dummydata';
+import { Link } from 'react-router-dom';
 import React from 'react';
 
 interface Users {
@@ -41,7 +42,9 @@ const Dashboard = () => {
                       <h1 className="text-[18px]">
                         <span className="text-blue-500 cursor-pointer">
                           {' '}
-                          {user.first_name}{' '}
+                          <Link to={`/student/user/${user.first_name}`}>
+                            {user.first_name}
+                          </Link>
                         </span>{' '}
                         learned{' '}
                         <span className="text-blue-500 cursor-pointer">

@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
-import UserProfile from "../components/user.png";
-import users from "../dummydata";
-import Navbar from "../components/common/Navbar";
-import { useState } from "react";
-import Follow from "../components/common/Follow";
-import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
+import UserProfile from '../components/user.png';
+import users from '../dummydata';
+import Navbar from '../components/common/Navbar';
+import { useState } from 'react';
+import Follow from '../components/common/Follow';
+import { Link } from 'react-router-dom';
+import React from 'react';
 
 const ProfilePage = () => {
   const params = useParams();
@@ -22,7 +23,7 @@ const ProfilePage = () => {
       <head>
         <title>Dashboard | {selectedUser?.first_name} </title>
       </head>
-      <Navbar />
+      <Navbar title="E-Learning System" />
       <section className="flex flex-col-2  mt-[2rem]">
         <Follow
           key={selectedUser?.id}
@@ -44,23 +45,21 @@ const ProfilePage = () => {
                   <div>
                     <h1 className="text-[18px]">
                       <span className="text-blue-500 cursor-pointer">
-                        {" "}
-                        <Link
-                          to={`/profile/student/${selectedUser?.first_name}`}
-                        >
+                        {' '}
+                        <Link to={`/student/user/${selectedUser?.first_name}`}>
                           {selectedUser?.first_name}
-                        </Link>{" "}
-                      </span>{" "}
-                      learned{" "}
+                        </Link>{' '}
+                      </span>{' '}
+                      learned{' '}
                       <span className="text-blue-500 cursor-pointer">
-                        {" "}
-                        {selectedUser?.score}{" "}
-                      </span>{" "}
-                      of{" "}
+                        {' '}
+                        {selectedUser?.score}{' '}
+                      </span>{' '}
+                      of{' '}
                       <span className="text-blue-500 cursor-pointer">
-                        {selectedUser?.total_items}{" "}
-                      </span>{" "}
-                      words in{" "}
+                        {selectedUser?.total_items}{' '}
+                      </span>{' '}
+                      words in{' '}
                       <span className="text-blue-500 cursor-pointer">
                         {selectedUser?.category}
                       </span>
