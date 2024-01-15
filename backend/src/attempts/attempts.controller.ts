@@ -1,5 +1,4 @@
 import {
-  Body,
   Controller,
   NotFoundException,
   Param,
@@ -29,8 +28,7 @@ export class AttemptsController {
   async userAttempt(
     @Req() request: Request,
     @Param('category_id') category_id: number,
-    @Param('word_id') word_id: number,
-    @Body('isDone') isDone: boolean
+    @Param('word_id') word_id: number
   ) {
     const cookie = request.cookies['jwt'];
     const { id: user_id } = await this.jwtService.verifyAsync(cookie);
@@ -52,8 +50,6 @@ export class AttemptsController {
     } else if (!category) {
       throw new NotFoundException('Category not found!');
     } else if (!answer) {
-      throw new NotFoundException('Answers are not yet recorded');
-    } else if (!isDone) {
       throw new NotFoundException('Answers are not yet recorded');
     }
     return this.attemptsService.save({
