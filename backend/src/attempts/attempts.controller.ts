@@ -37,7 +37,7 @@ export class AttemptsController {
       where: { category_id },
     });
 
-    const user = await this.userService.findOne({
+    const student = await this.userService.findOne({
       where: { user_id },
     });
 
@@ -45,15 +45,15 @@ export class AttemptsController {
       where: { word_id },
     });
 
-    if (!user) {
-      throw new NotFoundException('User not found!');
+    if (!student) {
+      throw new NotFoundException('Forbidden Resources');
     } else if (!category) {
       throw new NotFoundException('Category not found!');
     } else if (!answer) {
       throw new NotFoundException('Answers are not yet recorded');
     }
-    return this.attemptsService.save({
-      user: user.user_id,
+    return await this.attemptsService.save({
+      user: student.user_id,
       category: category.category_id,
     });
   }

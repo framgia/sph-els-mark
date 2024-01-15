@@ -59,7 +59,6 @@ export class AnswerController {
       throw new NotFoundException('Category Not Found');
     }
     if (!attempts) {
-      console.log(attempts);
       throw new NotFoundException('Attempt Error');
     }
     return await this.answerService.save({

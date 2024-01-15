@@ -34,17 +34,10 @@ export class CategoriesController {
 
   @UseGuards(AuthGuard)
   @Get(['student/categories', 'admin/categories'])
-  async all(@Body() body: CategoriesService, @Req() request: Request) {
-    const cookie = request.cookies['jwt'];
-    const { id: user_id } = await this.jwtService.verifyAsync(cookie);
-    const user = this.userService.findOne({ where: { user_id } });
-
-    if (!user) {
-      throw new NotFoundException('Forbidden Resource');
-    }
+  async all() {
     return this.categoriesService.find({});
   }
-  // Reminder: Add authguard
+
   @Get(['student/:categoryId/words', 'admin/:categoryId/words'])
   async allWords(@Param('categoryId') categoryId: number) {
     return await this.categoriesService.findOne({
@@ -61,15 +54,14 @@ export class CategoriesController {
     const cookie = request.cookies['jwt'];
     const { id: user_id } = await this.jwtService.verifyAsync(cookie);
 
-    const user = this.userService.findOne({ where: { user_id } });
-    if (!user) {
+    const admin = this.userService.findOne({ where: { user_id } });
+    if (!admin) {
       throw new NotFoundException('Forbidden Resource');
     }
 
     return this.categoriesService.save(body);
   }
 
-  // Reminder: Add authguard
   @Get(['student/word/:wordId', 'admin/word/:wordId'])
   async getChoices(@Param('wordId') wordId: number) {
     const words = await this.wordsService.findOne({
