@@ -62,7 +62,6 @@ export class AnswerController {
       console.log(attempts);
       throw new NotFoundException('Attempt Error');
     }
-    console.log(wordId);
     return await this.answerService.save({
       words: wordId.word_id,
       answer: body.answer,
