@@ -77,21 +77,6 @@ export class AuthController {
     };
   }
 
-  // @UseGuards(AuthGuard)
-  // @Get(['student/user', 'admin/user'])
-  // async user(@Req() request: Request) {
-  //   const cookie = request.cookies['jwt'];
-  //   console.log('JWT Token:', cookie);
-  //   const { id: user_id } = await this.jwtService.verifyAsync(cookie);
-  //   console.log('Decoded user_id:', user_id);
-  //   if (request.path === '/api/admin') {
-  //     return this.userService.findOne({ where: { user_id } });
-  //   }
-
-  //   const user = await this.userService.findOne({ where: { user_id } });
-
-  //   return user;
-  // }
   // For student users
   @UseGuards(AuthGuard)
   @Get('student/user')
