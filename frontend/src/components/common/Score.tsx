@@ -8,16 +8,14 @@ interface ScoreProps {
 
 const Score: React.FC<ScoreProps> = ({ answer, question }) => {
   return (
-    <>
-      <div
-        className={clsx('text-gray-700', {
-          'mx-[6rem] w-[5rem] ': question === true,
-          'mx-[11rem]': !question,
-        })}
-      >
-        {answer}
-      </div>
-    </>
+    <div
+      className={clsx('text-gray-700', {
+        'mx-[6rem] w-[5rem] ': question === true,
+        'mx-[11rem]': !question,
+      })}
+    >
+      {answer}
+    </div>
   );
 };
 export default Score;

@@ -5,18 +5,28 @@ import QuizHeader from '@/components/common/QuizHeader';
 import DummyResult from '@/context/dummyresult';
 import Score from '@/components/common/Score';
 import React from 'react';
+
 const ResultsPage = () => {
   const calculateScore = (word: any) => {
     return word.answer === word.correct_answer ? 1 : 0;
   };
 
-  const totalScore = DummyResult.reduce((acc, category) => {
+  //using random since category page is  not yet merge
+  const category_id = Math.floor(Math.random() * 1);
+  const catId = category_id + 1;
+
+  const totalScore = (category: any) => {
     const categoryScore = category.words.reduce(
-      (categoryAcc, word) => categoryAcc + calculateScore(word),
+      (categoryAcc: any, word: any) => categoryAcc + calculateScore(word),
       0
     );
-    return acc + categoryScore;
-  }, 0);
+    return categoryScore;
+  };
+
+  const specificCategory = DummyResult.find(
+    (category) => category.category_id === catId
+  );
+  const score = totalScore(specificCategory);
 
   return (
     <>
@@ -24,9 +34,12 @@ const ResultsPage = () => {
       <Navbar title="E-Learning System" />
       <section>
         <div className="flex col-span-2 justify-evenly mt-[5rem] tracking-wide">
-          <QuizHeader text={DummyResult[0].category_title} title="category" />
           <QuizHeader
-            text={`Result : ${totalScore} of ${DummyResult[0].words.length}`}
+            text={DummyResult[category_id].category_title}
+            title="category"
+          />
+          <QuizHeader
+            text={`Result : ${score} of ${DummyResult[category_id].words.length}`}
             title="question_no"
           />
         </div>
@@ -37,8 +50,8 @@ const ResultsPage = () => {
             <div />
           </div>
           <div>
-            {DummyResult[0].words.map((answer) => (
-              <ul>
+            {DummyResult[category_id].words.map((answer, word_id) => (
+              <ul key={word_id}>
                 <li className="flex justify-start mx-[10rem] w-[70rem] mt-4">
                   <div className="ml-[14rem] px-[2rem]">
                     {answer.correct_answer === answer.answer ? (

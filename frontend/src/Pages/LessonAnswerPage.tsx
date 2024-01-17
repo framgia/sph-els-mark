@@ -10,7 +10,6 @@ const LessonAnswerPage = () => {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [showScore, setShowScore] = useState<boolean>(false);
   const [score, setScore] = useState(0);
-
   const handleNextQuestion = (isCorrect: boolean) => {
     if (isCorrect) {
       setScore(score + 1);
@@ -22,12 +21,14 @@ const LessonAnswerPage = () => {
       setShowScore(true);
     }
   };
+  const category_id = Math.floor(Math.random() * 2 + 1);
+
   return (
     <>
       <Navbar title="E-Learning System" />
       <section>
         {showScore ? (
-          <Done />
+          <Done category_id={category_id} />
         ) : (
           <div className="flex col-span-2 justify-evenly mt-[5rem] tracking-wide">
             <div>
