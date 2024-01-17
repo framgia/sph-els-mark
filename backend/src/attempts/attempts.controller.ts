@@ -37,23 +37,17 @@ export class AttemptsController {
       where: { category_id },
     });
 
-    const student = await this.userService.findOne({
-      where: { user_id },
-    });
-
     const answer = await this.answerService.findOne({
       where: { word_id },
     });
 
-    if (!student) {
-      throw new NotFoundException('Forbidden Resources');
-    } else if (!category) {
+    if (!category) {
       throw new NotFoundException('Category not found!');
     } else if (!answer) {
       throw new NotFoundException('Answers are not yet recorded');
     }
     return await this.attemptsService.save({
-      user: student.user_id,
+      user: user_id,
       category: category.category_id,
     });
   }
