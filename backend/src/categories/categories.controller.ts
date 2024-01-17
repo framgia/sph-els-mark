@@ -2,13 +2,11 @@ import {
   Controller,
   Get,
   Body,
-  Req,
   Post,
   Param,
   NotFoundException,
   Put,
   Delete,
-  ForbiddenException,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/category-create.dto';
@@ -18,33 +16,21 @@ import { ChoicesService } from './choices.service';
 import { UseGuards } from '@nestjs/common';
 import { In } from 'typeorm';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { Request } from 'express';
-import { JwtService } from '@nestjs/jwt';
-import { UserService } from 'src/user/user.service';
 import { Choices } from './choices';
 @Controller()
 export class CategoriesController {
   constructor(
     private categoriesService: CategoriesService,
     private wordsService: WordsService,
-    private choicesService: ChoicesService,
-    private jwtService: JwtService,
-    private userService: UserService
+    private choicesService: ChoicesService
   ) {}
 
   @UseGuards(AuthGuard)
   @Get(['student/categories', 'admin/categories'])
-  async all(@Body() body: CategoriesService, @Req() request: Request) {
-    const cookie = request.cookies['jwt'];
-    const { id: user_id } = await this.jwtService.verifyAsync(cookie);
-    const user = this.userService.findOne({ where: { user_id } });
-
-    if (!user) {
-      throw new NotFoundException('Forbidden Resource');
-    }
+  async all() {
     return this.categoriesService.find({});
   }
-  // Reminder: Add authguard
+
   @Get(['student/:categoryId/words', 'admin/:categoryId/words'])
   async allWords(@Param('categoryId') categoryId: number) {
     return await this.categoriesService.findOne({
@@ -54,27 +40,13 @@ export class CategoriesController {
       relations: ['words'],
     });
   }
-  
+
   @UseGuards(AuthGuard)
   @Post('admin/category/create')
-  async create(
-    @Body() body: CreateCategoryDto,
-    @Req() request: Request,
-    
-    ) {
-    const cookie = request.cookies['jwt'];
-    const {id: user_id} = await this.jwtService.verifyAsync(cookie);
-    
-    const user = this.userService.findOne({ where: { user_id } });
-    if(!user){
-      throw new NotFoundException('Forbidden Resource');
-    }
-  
+  async create(@Body() body: CreateCategoryDto) {
     return this.categoriesService.save(body);
   }
 
-
-  // Reminder: Add authguard
   @Get(['student/word/:wordId', 'admin/word/:wordId'])
   async getChoices(@Param('wordId') wordId: number) {
     const words = await this.wordsService.findOne({
@@ -101,24 +73,16 @@ export class CategoriesController {
     throw new NotFoundException('Word not found!');
   }
 
-
   @UseGuards(AuthGuard)
   @Post('admin/category/:category_id/add')
   async createWord(
     @Param('category_id') category_id: number,
-    @Body() body: AddWordDto,
-    @Req() request: Request,
+    @Body() body: AddWordDto
   ) {
-    const cookie = request.cookies['jwt'];
-    const {id: user_id} = await this.jwtService.verifyAsync(cookie);
-    await this.userService.findOne({where: {user_id}});
-    const admin = await this.userService.findOne({where: {is_admin: true}})
     const category = await this.categoriesService.findOne({
-      where: { category_id }
+      where: { category_id },
     });
-    if(!admin){
-      throw new NotFoundException('Forbidden resource');
-    }
+
     if (!category) {
       throw new NotFoundException('Category not found!');
     }
@@ -130,7 +94,6 @@ export class CategoriesController {
     });
   }
 
-  
   @Put('admin/category/:category_id/edit')
   async editCategory(
     @Param('category_id') category_id: number,
@@ -155,23 +118,13 @@ export class CategoriesController {
 
   @UseGuards(AuthGuard)
   @Delete('admin/category/delete/:category_id')
-  async deleteCategory(
-    @Param('category_id') category_id: number,
-    @Req() request: Request
-  ) {
-    const cookie = request.cookies['jwt'];
-    const { id: user_id } = await this.jwtService.verifyAsync(cookie);
-    await this.userService.findOne({ where: { user_id } });
-    const admin = await this.userService.findOne({ where: { is_admin: true } });
+  async deleteCategory(@Param('category_id') category_id: number) {
     const category = await this.categoriesService.findOne({
       where: { category_id },
     });
 
     if (!category) {
       throw new NotFoundException('Category not found!');
-    }
-    if (!admin) {
-      throw new ForbiddenException('Forbidden Resource');
     }
 
     const words = await this.wordsService.find({ where: { category } });

@@ -7,10 +7,19 @@ import { WordsService } from 'src/categories/words.service';
 import { Words } from 'src/categories/words';
 import { AttemptsService } from 'src/attempts/attempts.service';
 import { Attempts } from 'src/attempts/attempts';
-import { SharedModule } from 'src/shared/shared.module';
+import { UserService } from '@/user/user.service';
+import { User } from '@/user/user';
+import { JwtModule } from '@nestjs/jwt';
+
 @Module({
-  imports: [SharedModule, TypeOrmModule.forFeature([Answers, Words, Attempts])],
+  imports: [
+    JwtModule.register({
+      secret: 'secret',
+      signOptions: { expiresIn: '1d' },
+    }),
+    TypeOrmModule.forFeature([Answers, Words, Attempts, User]),
+  ],
   controllers: [AnswerController],
-  providers: [AnswerService, WordsService, AttemptsService],
+  providers: [AnswerService, WordsService, AttemptsService, UserService],
 })
 export class AnswerModule {}
