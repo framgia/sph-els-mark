@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-const Done = () => {
+interface Category {
+  category_id: number;
+}
+const Done: React.FC<Category> = ({ category_id }) => {
+  //since CategoryPage is not yet merge
+
   return (
     <>
       <div className="mt-[5rem] px-4 mx-auto max-w-screen-xl text-center lg:py-16">
@@ -11,7 +16,7 @@ const Done = () => {
           “Dreams don't work unless you do.”
         </p>
 
-        <Link to={'#resultspage'}>
+        <Link to={`/student/category/${category_id}/result`}>
           <button className="bg-green-500 hover:bg-green-700 px-7 py-4  my-5 rounded-full text-white">
             See Results
           </button>

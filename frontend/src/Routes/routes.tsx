@@ -7,10 +7,14 @@ import AdminLogin from '@/Pages/auth/AdminLogin';
 import AdminSignin from '@/Pages/auth/AdminSignUp';
 import Dashboard from '@/Pages/Dashboard';
 import AdminUserPage from '@/Pages/AdminUserPage';
-import React from 'react';
 import LessonAnswerPage from '@/Pages/LessonAnswerPage';
+import ResultsPage from '@/Pages/ResultsPage';
+import React from 'react';
+import AddWordPage from '@/Pages/AddWordPage';
+import AddCategoryPage from '@/Pages/AddCategoryPage';
+import CategoryListPage from '@/Pages/CategoryListPage';
 
-const Main: React.FC = () => {
+const Main = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
@@ -21,7 +25,11 @@ const Main: React.FC = () => {
       <Route path="/admin-register" element={<AdminSignin />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/admin/users-list" element={<AdminUserPage />} />
-      <Route path="/student/category/:id/" element={<LessonAnswerPage />} />
+      <Route path="/student/category/:id" element={<LessonAnswerPage />} />
+      <Route path="admin/category/add" element={<AddCategoryPage />} />
+      <Route path="admin/category/:category_id/add" element={<AddWordPage />} />
+      <Route path="/admin/categories" element={<CategoryListPage />} />
+      <Route path="student/category/:id/result" element={<ResultsPage />} />
     </Routes>
   );
 };

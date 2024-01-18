@@ -2,54 +2,54 @@ import ChoicesButton from '@/components/common/ChoicesButton';
 import Done from '@/components/common/Done';
 import Navbar from '@/components/common/Navbar';
 import QuizHeader from '@/components/common/QuizHeader';
-import DummyTest from '@/dummytest';
+import dummyQuestions from '@/context/dummytest';
 import { useState } from 'react';
 import React from 'react';
-
 const LessonAnswerPage = () => {
-  const Items = DummyTest.length;
-  const [question, setQuestion] = useState(0);
+  const totalQuestions = dummyQuestions.length;
+  const [questionIndex, setQuestionIndex] = useState(0);
   const [showScore, setShowScore] = useState<boolean>(false);
   const [score, setScore] = useState(0);
-
   const handleNextQuestion = (isCorrect: boolean) => {
-    if (isCorrect === true) {
+    if (isCorrect) {
       setScore(score + 1);
     }
-    const nextQuestion = question + 1;
-    if (nextQuestion < Items) {
-      setQuestion(nextQuestion);
+    const nextQuestion = questionIndex + 1;
+    if (nextQuestion < totalQuestions) {
+      setQuestionIndex(nextQuestion);
     } else {
       setShowScore(true);
     }
   };
+  const category_id = Math.floor(Math.random() * 2 + 1);
+
   return (
     <>
       <Navbar title="E-Learning System" />
       <section>
         {showScore ? (
-          <Done />
+          <Done category_id={category_id} />
         ) : (
           <div className="flex col-span-2 justify-evenly mt-[5rem] tracking-wide">
             <div>
               <QuizHeader
-                text={DummyTest[question].category_title}
+                text={dummyQuestions[questionIndex].category_title}
                 title="category"
               />
 
               <QuizHeader
-                text={DummyTest[question].question}
+                text={dummyQuestions[questionIndex].question}
                 title="question"
               />
             </div>
 
             <div>
               <QuizHeader
-                text={`Question ${DummyTest[question].id} of ${Items}`}
+                text={`Question ${dummyQuestions[questionIndex].id} of ${totalQuestions}`}
                 title="question_no"
               />
               <div className="mt-8">
-                {DummyTest[question].choices.map((choices) => (
+                {dummyQuestions[questionIndex].choices.map((choices) => (
                   <ChoicesButton
                     handleNextQuestion={() =>
                       handleNextQuestion(choices.isCorrect)

@@ -23,12 +23,5 @@
     "incremental": true,
     "outDir": "./dist"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "src/**/*",
-    "config/craco.config.ts"
-  ],
-  "exclude": ["node_modules", "**/_gen"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/**/*"]
 }

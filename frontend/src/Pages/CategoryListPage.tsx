@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import Navbar from '@/components/common/Navbar';
-import dummyCategories from '@/dummycategory';
+import dummyCategories from '@/context/dummycategory';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 interface CategoryList {

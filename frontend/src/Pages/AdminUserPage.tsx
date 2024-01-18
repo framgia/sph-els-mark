@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ViewUserList from '@/components/common/ViewUserlist';
 import Navbar from '@/components/common/Navbar';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
-import users from '@/dummydata';
+import users from '@/context/dummydata';
 import React from 'react';
 import clsx from 'clsx';
 
