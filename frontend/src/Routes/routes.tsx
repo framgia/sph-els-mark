@@ -9,6 +9,9 @@ import Dashboard from '@/Pages/Dashboard';
 import AdminUserPage from '@/Pages/AdminUserPage';
 import React from 'react';
 import LessonAnswerPage from '@/Pages/LessonAnswerPage';
+import AdminDashboard from '@/Pages/AdminDashboard';
+import CategoryListPage from '@/Pages/CategoryListPage';
+import AddWordPage from '@/Pages/AddWordPage';
 
 const Main: React.FC = () => {
   return (
@@ -22,6 +25,9 @@ const Main: React.FC = () => {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/admin/users-list" element={<AdminUserPage />} />
       <Route path="/student/category/:id/" element={<LessonAnswerPage />} />
+      <Route path="/admin/dashboard" element={<AdminDashboard />} />
+      <Route path="/admin/categories" element={<CategoryListPage />} />
+      <Route path="/admin/category/:id/add-word" element={<AddWordPage />} />
     </Routes>
   );
 };

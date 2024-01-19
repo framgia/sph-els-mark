@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Radio, RadioGroup, FormControlLabel } from '@mui/material';
 import ButtonAddWord from '@/components/common/ButtonAddWord';
 import InputFieldAddWord from '@/components/common/InputFieldAddWord';
-import Navbar from '@/components/common/Navbar';
+import AdminNavbar from '@/components/common/AdminNavbar';
 
 interface AddWordPageProps {}
 
@@ -15,7 +15,7 @@ const AddWordPage: React.FC<AddWordPageProps> = () => {
 
   return (
     <>
-      <Navbar title="E-Learning System | Admin" />
+      <AdminNavbar title="E-Learning System | Admin" />
       <div className="ml-[15rem] mt-20 flex justify-evenly w-[64rem] h-[30rem] mx-auto bg-white rounded-xl shadow-md ">
         <div>
           <h1 className="ml-[43px] mt-[40px] ">Add Word</h1>
