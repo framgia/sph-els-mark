@@ -7,10 +7,9 @@ import { Words } from './words';
 import { Choices } from './choices';
 import { WordsService } from './words.service';
 import { ChoicesService } from './choices.service';
-import { JwtModule} from '@nestjs/jwt';
-import { User } from 'src/user/user';
+import { JwtModule } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
-
+import { User } from '@/user/user';
 
 @Module({
   imports: [
