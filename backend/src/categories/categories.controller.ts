@@ -7,6 +7,7 @@ import {
   NotFoundException,
   Put,
   Delete,
+  Req,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/category-create.dto';
@@ -17,12 +18,17 @@ import { UseGuards } from '@nestjs/common';
 import { In } from 'typeorm';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Choices } from './choices';
+import { Request } from 'express';
+import { JwtService } from '@nestjs/jwt';
+import { UserService } from '@/user/user.service';
 @Controller()
 export class CategoriesController {
   constructor(
     private categoriesService: CategoriesService,
     private wordsService: WordsService,
-    private choicesService: ChoicesService
+    private choicesService: ChoicesService,
+    private jwtService: JwtService,
+    private userService: UserService
   ) {}
 
   @UseGuards(AuthGuard)
@@ -43,10 +49,19 @@ export class CategoriesController {
 
   @UseGuards(AuthGuard)
   @Post('admin/category/create')
-  async create(@Body() body: CreateCategoryDto) {
+  async create(@Body() body: CreateCategoryDto, @Req() request: Request) {
+    const cookie = request.cookies['jwt'];
+    const { id: user_id } = await this.jwtService.verifyAsync(cookie);
+
+    const user = this.userService.findOne({ where: { user_id } });
+    if (!user) {
+      throw new NotFoundException('Forbidden Resource');
+    }
+
     return this.categoriesService.save(body);
   }
 
+  @UseGuards(AuthGuard)
   @Get(['student/word/:wordId', 'admin/word/:wordId'])
   async getChoices(@Param('wordId') wordId: number) {
     const words = await this.wordsService.findOne({
@@ -69,20 +84,25 @@ export class CategoriesController {
 
       return formattedData;
     }
-
-    throw new NotFoundException('Word not found!');
   }
 
   @UseGuards(AuthGuard)
   @Post('admin/category/:category_id/add')
   async createWord(
     @Param('category_id') category_id: number,
-    @Body() body: AddWordDto
+    @Body() body: AddWordDto,
+    @Req() request: Request
   ) {
+    const cookie = request.cookies['jwt'];
+    const { id: user_id } = await this.jwtService.verifyAsync(cookie);
+    await this.userService.findOne({ where: { user_id } });
+    const admin = await this.userService.findOne({ where: { is_admin: true } });
     const category = await this.categoriesService.findOne({
       where: { category_id },
     });
-
+    if (!admin) {
+      throw new NotFoundException('Forbidden resource');
+    }
     if (!category) {
       throw new NotFoundException('Category not found!');
     }
