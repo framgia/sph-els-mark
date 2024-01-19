@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
-import Navbar from '@/components/common/Navbar';
 import dummyCategories from '@/dummycategory';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
+import AdminNavbar from '@/components/common/AdminNavbar';
 interface CategoryList {
   id: number;
   name: string;
@@ -26,8 +27,8 @@ const CategoryListPage = () => {
   };
   return (
     <>
-      <title>Categories</title>
-      <Navbar title="E-Learning System | Admin" />
+      <title>Admin|Categories</title>
+      <AdminNavbar title="E-Learning System | Admin" />
       <div className="pl-[13rem] pt-[2rem] w-[80rem] h-[40rem] mx-[8rem] bg-white rounded-xl">
         <h4 className="py-[1px] font-bold">Categories</h4>
         <table className="border-4 border-black mt-[1rem] w-[56rem] h-[25rem] table-fixed">
@@ -48,24 +49,36 @@ const CategoryListPage = () => {
                   {category.description}
                 </td>
                 <td className="border-2 border-black whitespace-nowrap px-[5px] text-center">
-                  <button
-                    type="button"
-                    className="px-[5px] underline decoration-sky-500 hover:bg-sky-500"
+                  <Link
+                    to={{ pathname: `/admin/category/${category.id}/add-word` }}
                   >
-                    Add Words
-                  </button>
-                  <button
-                    type="button"
-                    className="px-[5px] underline decoration-yellow-500 hover:bg-yellow-700"
+                    <button
+                      type="button"
+                      className="px-[5px] underline decoration-sky-500 hover:bg-sky-500"
+                    >
+                      Add Words
+                    </button>
+                  </Link>
+                  <Link
+                    to={{ pathname: `/admin/category/${category.id}/edit` }}
                   >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    className="px-[5px] underline decoration-red-500 hover:bg-red-500"
+                    <button
+                      type="button"
+                      className="px-[5px] underline decoration-yellow-500 hover:bg-yellow-700"
+                    >
+                      Edit
+                    </button>
+                  </Link>
+                  <Link
+                    to={{ pathname: `/admin/category/${category.id}/delete` }}
                   >
-                    Delete
-                  </button>
+                    <button
+                      type="button"
+                      className="px-[5px] underline decoration-red-500 hover:bg-red-500"
+                    >
+                      Delete
+                    </button>
+                  </Link>
                 </td>
               </tr>
             ))}

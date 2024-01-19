@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import ViewUserList from '@/components/common/ViewUserlist';
-import Navbar from '@/components/common/Navbar';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 import users from '@/dummydata';
 import React from 'react';
 import clsx from 'clsx';
+import AdminNavbar from '@/components/common/AdminNavbar';
 
 interface UserList {
   id: number;
@@ -31,7 +31,7 @@ const AdminUserPage = () => {
 
   return (
     <>
-      <Navbar title="E-Learning System | Admin" />
+      <AdminNavbar title="E-Learning System | Admin" />
       <div className="w-[80rem] h-[40rem] mx-[8rem] bg-white rounded-xl shadow-md">
         <h1 className="ml-[10rem] mt-[2rem] font-bold">User List</h1>
         <table className="ml-[10rem] mt-[1rem] w-[56rem] h-[30rem] table-fixed">
