@@ -7,6 +7,7 @@ import AdminLogin from '@/Pages/auth/AdminLogin';
 import AdminSignin from '@/Pages/auth/AdminSignUp';
 import Dashboard from '@/Pages/Dashboard';
 import AdminUserPage from '@/Pages/AdminUserPage';
+import WordListPage from '@/Pages/WordListPage';
 import React from 'react';
 import LessonAnswerPage from '@/Pages/LessonAnswerPage';
 
@@ -22,6 +23,7 @@ const Main: React.FC = () => {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/admin/users-list" element={<AdminUserPage />} />
       <Route path="/student/category/:id/" element={<LessonAnswerPage />} />
+      <Route path="/admin/category/:id/words" element={<WordListPage />} />
     </Routes>
   );
 };

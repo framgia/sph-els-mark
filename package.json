@@ -22,7 +22,12 @@
   },
   "homepage": "https://github.com/framgia/sph-els-mark#readme",
   "dependencies": {
-    "mrm-task-lint-staged": "^7.1.22"
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.5",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.12",
+    "mrm-task-lint-staged": "^7.1.22",
+    "styled-components": "^6.1.8"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
