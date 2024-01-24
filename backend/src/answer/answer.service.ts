@@ -12,4 +12,13 @@ export class AnswerService extends SharedService {
   ) {
     super(answersRepository);
   }
+  async deleteByWordId(wordId: number): Promise<void> {
+    // Find answers where words.word_id matches the provided wordId
+    const answersToDelete = await this.answersRepository.find({
+      where: { words: { word_id: wordId } },
+    });
+
+    // Delete the found answers
+    await this.answersRepository.remove(answersToDelete);
+  }
 }

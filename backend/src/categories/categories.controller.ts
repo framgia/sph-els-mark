@@ -17,12 +17,16 @@ import { UseGuards } from '@nestjs/common';
 import { In } from 'typeorm';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Choices } from './choices';
+import { AnswerService } from '@/answer/answer.service';
+import { AttemptsService } from '@/attempts/attempts.service';
 @Controller()
 export class CategoriesController {
   constructor(
     private categoriesService: CategoriesService,
     private wordsService: WordsService,
-    private choicesService: ChoicesService
+    private choicesService: ChoicesService,
+    private answersService: AnswerService,
+    private attemptsService: AttemptsService
   ) {}
 
   @UseGuards(AuthGuard)
@@ -127,11 +131,21 @@ export class CategoriesController {
       throw new NotFoundException('Category not found!');
     }
 
+    const attempts = await this.attemptsService.find({ where: { category } });
+
+    for (const attempt of attempts) {
+      await this.answersService.delete({
+        attempts: { attempt_id: attempt.attempt_id },
+      });
+    }
+
     const words = await this.wordsService.find({ where: { category } });
     const wordId = words.map((word) => word.word_id);
-
     await this.choicesService.delete({ options: In(wordId) });
     await this.wordsService.delete({ word_id: In(wordId) });
+
+    await this.attemptsService.delete({ category });
+
     await this.categoriesService.delete(category);
 
     return { code: 200, message: 'Category deleted successfully!' };
@@ -187,6 +201,8 @@ export class CategoriesController {
     if (!word) {
       throw new NotFoundException('Word not found!');
     }
+
+    await this.answersService.deleteByWordId(word_id);
     const words = await this.wordsService.find({ where: { category } });
     const wordsId = words.map((word) => word.word_id);
 

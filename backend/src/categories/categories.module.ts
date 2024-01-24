@@ -7,10 +7,13 @@ import { Words } from './words';
 import { Choices } from './choices';
 import { WordsService } from './words.service';
 import { ChoicesService } from './choices.service';
-import { JwtModule} from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { User } from 'src/user/user';
 import { UserService } from 'src/user/user.service';
-
+import { AnswerService } from '@/answer/answer.service';
+import { Answers } from '@/answer/answers';
+import { AttemptsService } from '@/attempts/attempts.service';
+import { Attempts } from '@/attempts/attempts';
 
 @Module({
   imports: [
@@ -18,9 +21,23 @@ import { UserService } from 'src/user/user.service';
       secret: 'secret',
       signOptions: { expiresIn: '1d' },
     }),
-    TypeOrmModule.forFeature([Category, Words, Choices, User]),
+    TypeOrmModule.forFeature([
+      Category,
+      Words,
+      Choices,
+      User,
+      Answers,
+      Attempts,
+    ]),
   ],
   controllers: [CategoriesController],
-  providers: [CategoriesService, WordsService, ChoicesService, UserService],
+  providers: [
+    CategoriesService,
+    WordsService,
+    ChoicesService,
+    UserService,
+    AnswerService,
+    AttemptsService,
+  ],
 })
 export class CategoriesModule {}
