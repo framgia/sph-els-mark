@@ -94,6 +94,7 @@ export class CategoriesController {
     });
   }
 
+  @UseGuards(AuthGuard)
   @Put('admin/category/:category_id/edit')
   async editCategory(
     @Param('category_id') category_id: number,
