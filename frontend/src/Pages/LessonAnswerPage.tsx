@@ -7,6 +7,7 @@ import { useState } from 'react';
 import React from 'react';
 
 const LessonAnswerPage = () => {
+  const shuffledTest = shuffleArray(DummyTest);
   const Items = DummyTest.length;
   const [question, setQuestion] = useState(0);
   const [showScore, setShowScore] = useState<boolean>(false);
@@ -23,6 +24,14 @@ const LessonAnswerPage = () => {
       setShowScore(true);
     }
   };
+
+  function shuffleArray(array: any[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
   return (
     <>
       <Navbar title="E-Learning System" />
@@ -45,11 +54,11 @@ const LessonAnswerPage = () => {
 
             <div>
               <QuizHeader
-                text={`Question ${DummyTest[question].id} of ${Items}`}
+                text={`Question ${shuffledTest[question].id} of ${Items}`}
                 title="question_no"
               />
               <div className="mt-8">
-                {DummyTest[question].choices.map((choices) => (
+                {shuffleArray(DummyTest[question].choices).map((choices) => (
                   <ChoicesButton
                     handleNextQuestion={() =>
                       handleNextQuestion(choices.isCorrect)
