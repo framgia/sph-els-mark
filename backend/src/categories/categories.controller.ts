@@ -118,13 +118,23 @@ export class CategoriesController {
 
   @UseGuards(AuthGuard)
   @Delete('admin/category/delete/:category_id')
-  async deleteCategory(@Param('category_id') category_id: number) {
+  async deleteCategory(
+    @Param('category_id') category_id: number,
+    @Req() request: Request
+  ) {
+    const cookie = request.cookies['jwt'];
+    const { id: user_id } = await this.jwtService.verifyAsync(cookie);
+    await this.userService.findOne({ where: { user_id } });
+    const admin = await this.userService.findOne({ where: { is_admin: true } });
     const category = await this.categoriesService.findOne({
       where: { category_id },
     });
 
     if (!category) {
       throw new NotFoundException('Category not found!');
+    }
+    if (!admin) {
+      throw new ForbiddenException('Forbidden Resource');
     }
 
     const words = await this.wordsService.find({ where: { category } });

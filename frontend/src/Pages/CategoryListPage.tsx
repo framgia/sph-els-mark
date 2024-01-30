@@ -1,17 +1,25 @@
-import React from 'react';
-import { useState } from 'react';
-import Navbar from '@/components/common/Navbar';
+import React, { useState } from 'react';
+import EditCategoryDialog from './auth/components/EditCategoryDialog';
 import dummyCategories from '@/dummycategory';
+import Navbar from '@/components/common/Navbar';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
+
 interface CategoryList {
   id: number;
   name: string;
   description: string;
 }
+
 const itemsPerPage: number = 5;
+
 const CategoryListPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
+    null
+  );
+
   const totalPages: number = Math.ceil(dummyCategories.length / itemsPerPage);
   const startIndex: number = (currentPage - 1) * itemsPerPage;
   const endIndex: number = startIndex + itemsPerPage;
@@ -19,11 +27,23 @@ const CategoryListPage = () => {
     startIndex,
     endIndex
   );
+
   const handlePageChange = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
     }
   };
+
+  const handleEditDialogOpen = (categoryId: number) => {
+    setSelectedCategoryId(categoryId);
+    setIsEditDialogOpen(true);
+  };
+
+  const handleEditDialogClose = () => {
+    setIsEditDialogOpen(false);
+    setSelectedCategoryId(null);
+  };
+
   return (
     <>
       <title>Categories</title>
@@ -55,7 +75,7 @@ const CategoryListPage = () => {
                     Add Words
                   </button>
                   <button
-                    type="button"
+                    onClick={() => handleEditDialogOpen(category.id)}
                     className="px-[5px] underline decoration-yellow-500 hover:bg-yellow-700"
                   >
                     Edit
@@ -109,7 +129,13 @@ const CategoryListPage = () => {
           </nav>
         </div>
       </div>
+      <EditCategoryDialog
+        open={isEditDialogOpen}
+        onClose={handleEditDialogClose}
+        selectedCategoryId={selectedCategoryId || 0}
+      />
     </>
   );
 };
+
 export default CategoryListPage;
